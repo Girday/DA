@@ -15,5 +15,8 @@ int main() {
     while (std::cin >> key >> value)
         objects.push_back({key, value});
 
+    for (const auto& obj : objects)
+        std::cout << "Key: " << obj.first << ", Value: " << obj.second << std::endl;
+
     return 0;
 }
