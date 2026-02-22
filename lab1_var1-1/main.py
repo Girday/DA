@@ -1,12 +1,13 @@
 dictionary = [
     (3, "three1"),
+    (2, "two1"),
     (14, "fourteen1"),
     (15, "fifteen1"),
     (9, "nine1"),
     (15, "fifteen2"),
-    (2, "two1"),
+    (2, "two2"),
     (6, "six1"),
-    (5, "five"),
+    (5, "five1"),
     (32, "thirtytwo1"),
 ]
 
@@ -16,27 +17,27 @@ while s := input():
     d.append([int(a), b])
 
 
-def prefix_sum(arrow):
-    for i in range(len(arrow) - 1):
-        arrow[i + 1] = arrow[i] + arrow[i + 1]
-    return arrow
+def prefix_sum(array):
+    for i in range(len(array) - 1):
+        array[i + 1] = array[i] + array[i + 1]
+    return array
 
 
-def counting_sort(arrow: list) -> list:
-    max_element = max(x[0] for x in arrow)
+def counting_sort(array: list) -> list:
+    max_element = max(x[0] for x in array)
 
-    counting_arrow = [0 for i in range(max_element + 1)]
-    for element in arrow:
-        counting_arrow[element[0]] += 1
-    counting_arrow = prefix_sum(counting_arrow)
+    counting_array = [0 for i in range(max_element + 1)]
+    for element in array:
+        counting_array[element[0]] += 1
+    counting_array = prefix_sum(counting_array)
 
-    sorted_arrow = [[0, ""] for i in range(len(arrow))]
+    sorted_array = [[0, ""] for i in range(len(array))]
 
-    for element in arrow[::-1]:
-        sorted_arrow[counting_arrow[element[0]] - 1] = element
-        counting_arrow[element[0]] -= 1
+    for element in array[::-1]:
+        sorted_array[counting_array[element[0]] - 1] = element
+        counting_array[element[0]] -= 1
 
-    return sorted_arrow
+    return sorted_array
 
 
-print(*counting_sort(d), sep="\n")
+print(*counting_sort(dictionary), sep="\n")
