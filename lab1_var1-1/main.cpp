@@ -34,6 +34,8 @@ void CountingSort(std::vector<Object>& objects) {
         int position = --counting_array[obj.first];
         sorted_array[position] = obj;
     }
+
+    objects.swap(sorted_array);
 }
 
 int main() {
