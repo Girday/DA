@@ -1,0 +1,83 @@
+\section{Описание}
+Требуется реализовать сортировку подсчётом для последовательности пар \enquote{ключ-значение}.
+Ключи лежат в фиксированном диапазоне от 0 до 65535, поэтому для каждого возможного ключа можно
+хранить количество его вхождений в отдельной ячейке массива.
+
+Основная идея сортировки подсчётом состоит в том, что сначала подсчитывается число элементов
+каждого ключа, а затем по префиксным суммам вычисляются итоговые позиции элементов в отсортированной
+последовательности \cite{Kormen}.
+
+В данной работе алгоритм реализован в стабильном варианте и выполняется в три этапа:
+\begin{enumerate}
+\item Подсчёт частот ключей в массиве счётчиков размера $65536$.
+\item Преобразование массива частот в массив префиксных сумм.
+\item Размещение элементов во временный массив при проходе исходного массива справа налево.
+\end{enumerate}
+
+Проход справа налево нужен для сохранения исходного порядка элементов с одинаковыми ключами
+(стабильность сортировки).
+
+Асимптотика реализации:
+\begin{itemize}
+\item время: $O(n + k)$, где $n$ --- число пар, $k = 65536$;
+\item дополнительная память: $O(n + k)$.
+\end{itemize}
+
+\section{Исходный код}
+Программа состоит из функции сортировки \texttt{CountingSort} и функции \texttt{main}.
+
+Для хранения элементов используются псевдонимы типов:
+\begin{itemize}
+\item \texttt{Key} --- тип ключа (\texttt{int});
+\item \texttt{Value} --- тип значения (\texttt{std::string});
+\item \texttt{Object} --- пара \texttt{std::pair<Key, Value>}.
+\end{itemize}
+
+Также задаётся константа \texttt{KEY\_RANGE = 65536}, соответствующая числу всех возможных ключей.
+
+\textbf{Логика функции \texttt{CountingSort(std::vector<Object>\& objects)}:}
+\begin{enumerate}
+\item Если входной массив пуст, функция сразу завершает работу.
+\item Создаётся и инициализируется нулями массив счётчиков
+\texttt{std::array<Key, KEY\_RANGE> counting\_array\{\}}.
+\item В цикле по входным данным для каждого элемента увеличивается счётчик
+\texttt{counting\_array[obj.first]}.
+\item Далее строятся префиксные суммы: каждая ячейка хранит количество элементов
+с ключами не больше текущего.
+\item Создаётся временный массив \texttt{sorted\_array} размером \texttt{objects.size()}.
+\item Выполняется проход по \texttt{objects} с конца к началу:
+для элемента вычисляется итоговая позиция \texttt{position = {-}{-}counting\_array[obj.first]},
+после чего элемент помещается в \texttt{sorted\_array[position]}.
+\item После заполнения временного массива содержимое \texttt{objects} и \texttt{sorted\_array}
+меняется местами через \texttt{swap}.
+\end{enumerate}
+
+\textbf{Логика функции \texttt{main}:}
+\begin{enumerate}
+\item Считываются пары \texttt{key value} из стандартного потока до конца файла.
+\item Каждая считанная пара добавляется в вектор \texttt{objects}.
+\item После завершения ввода вызывается \texttt{CountingSort(objects)}.
+\item Отсортированные пары выводятся в формате
+\texttt{key\textbackslash tvalue} (ключ, символ табуляции, значение).
+\end{enumerate}
+
+Полный текст программы:
+
+\lstinputlisting[language=C++, caption={Реализация лабораторной работы}, label={lst:maincpp}]{../main.cpp}
+\pagebreak
+
+\section{Консоль}
+\begin{alltt}
+$ g++ main.cpp -o lab1.out
+$ cat input.txt
+0    n399tann9nnt3ttnaaan9nann93na9t3a3t9999na3aan9antt3tn93aat3naatt
+65535    n399tann9nnt3ttnaaan9nann93na9t3a3t9999na3aan9antt3tn93aat3naat
+0    n399tann9nnt3ttnaaan9nann93na9t3a3t9999na3aan9antt3tn93aat3naa
+65535    n399tann9nnt3ttnaaan9nann93na9t3a3t9999na3aan9antt3tn93aat3na
+$ ./lab1 < input.txt
+0    n399tann9nnt3ttnaaan9nann93na9t3a3t9999na3aan9antt3tn93aat3naatt
+0    n399tann9nnt3ttnaaan9nann93na9t3a3t9999na3aan9antt3tn93aat3naa
+65535    n399tann9nnt3ttnaaan9nann93na9t3a3t9999na3aan9antt3tn93aat3naat
+65535    n399tann9nnt3ttnaaan9nann93na9t3a3t9999na3aan9antt3tn93aat3na
+\end{alltt}
+\pagebreak
