@@ -2,6 +2,7 @@
 #include <vector>
 #include <utility>
 #include <string>
+#include <array>
 
 using Key = int;
 using Value = std::string;
@@ -12,6 +13,8 @@ const Key MAX_KEY = 65535;
 void CountingSort(std::vector<Object>& objects) {
     if (objects.empty())
         return;
+    
+    std::array<Key, MAX_KEY> counting_array{};
 }
 
 int main() {
