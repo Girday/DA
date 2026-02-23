@@ -7,9 +7,9 @@ using Key = int;
 using Value = std::string;
 using Object = std::pair<Key, Value>;
 
-int CountingSort(std::vector<Object>& objects) {
+void CountingSort(std::vector<Object>& objects) {
     if (objects.empty())
-        return 0;    
+        return;
 }
 
 int main() {
