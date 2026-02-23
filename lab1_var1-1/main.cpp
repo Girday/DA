@@ -14,8 +14,10 @@ void CountingSort(std::vector<Object>& objects) {
     if (objects.empty())
         return;
     
+    // Частотный словарь ключей
     std::array<Key, MAX_KEY> counting_array{};
 
+    // Подсчёт частоты ключей
     for (const auto& obj : objects)
         ++counting_array[obj.first];
 
