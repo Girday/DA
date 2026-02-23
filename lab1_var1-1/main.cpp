@@ -41,10 +41,10 @@ int main() {
     while (std::cin >> key >> value)
         objects.push_back({key, value});
 
-    // for (const auto& obj : objects)
-    //     std::cout << "Key: " << obj.first << ", Value: " << obj.second << std::endl;
-
     CountingSort(objects);
+
+    for (const auto& obj : objects)
+        std::cout << obj.first << '\t' << obj.second << '\n';
 
     return 0;
 }
