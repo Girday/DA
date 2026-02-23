@@ -24,6 +24,9 @@ void CountingSort(std::vector<Object>& objects) {
     // Создание префиксных сумм
     for (int i = 1; i < KEY_RANGE; ++i)
         counting_array[i] += counting_array[i - 1];
+
+    // Отсортированный вектор длиной как начальный
+    std::vector<Object> sorted_array(objects.size());
 }
 
 int main() {
