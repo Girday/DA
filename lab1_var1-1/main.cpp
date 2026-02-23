@@ -21,6 +21,8 @@ void CountingSort(std::vector<Object>& objects) {
     for (const auto& obj : objects)
         ++counting_array[obj.first];
 
+    for (int i = 1; i < KEY_RANGE; ++i)
+        counting_array[i] += counting_array[i - 1];
 }
 
 int main() {
