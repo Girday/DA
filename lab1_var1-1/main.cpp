@@ -14,21 +14,16 @@ void CountingSort(std::vector<Object>& objects) {
     if (objects.empty())
         return;
     
-    // Частотный словарь ключей
     std::array<Key, KEY_RANGE> counting_array{};
 
-    // Подсчёт частоты ключей
     for (const auto& obj : objects)
         ++counting_array[obj.first];
 
-    // Создание префиксных сумм
     for (int i = 1; i < KEY_RANGE; ++i)
         counting_array[i] += counting_array[i - 1];
 
-    // "Отсортированный" вектор длиной как начальный
     std::vector<Object> sorted_array(objects.size());
 
-    // Заполнение "отсортированного" вектора
     for (int i = objects.size(); i > 0; --i) {
         const auto& obj = objects[i - 1];
         int position = --counting_array[obj.first];
