@@ -8,13 +8,17 @@ using Key = int;
 using Value = std::string;
 using Object = std::pair<Key, Value>;
 
-const Key MAX_KEY = 65535;
+const Key MAX_KEY = 65536;
 
 void CountingSort(std::vector<Object>& objects) {
     if (objects.empty())
         return;
     
     std::array<Key, MAX_KEY> counting_array{};
+
+    for (const auto& obj : objects)
+        ++counting_array[obj.first];
+
 }
 
 int main() {
@@ -25,8 +29,10 @@ int main() {
     while (std::cin >> key >> value)
         objects.push_back({key, value});
 
-    for (const auto& obj : objects)
-        std::cout << "Key: " << obj.first << ", Value: " << obj.second << std::endl;
+    // for (const auto& obj : objects)
+    //     std::cout << "Key: " << obj.first << ", Value: " << obj.second << std::endl;
+
+    CountingSort(objects);
 
     return 0;
 }
