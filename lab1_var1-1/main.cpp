@@ -8,14 +8,14 @@ using Key = int;
 using Value = std::string;
 using Object = std::pair<Key, Value>;
 
-const Key MAX_KEY = 65536;
+const Key KEY_RANGE = 65536;
 
 void CountingSort(std::vector<Object>& objects) {
     if (objects.empty())
         return;
     
     // Частотный словарь ключей
-    std::array<Key, MAX_KEY> counting_array{};
+    std::array<Key, KEY_RANGE> counting_array{};
 
     // Подсчёт частоты ключей
     for (const auto& obj : objects)
