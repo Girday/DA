@@ -25,8 +25,15 @@ void CountingSort(std::vector<Object>& objects) {
     for (int i = 1; i < KEY_RANGE; ++i)
         counting_array[i] += counting_array[i - 1];
 
-    // Отсортированный вектор длиной как начальный
+    // "Отсортированный" вектор длиной как начальный
     std::vector<Object> sorted_array(objects.size());
+
+    // Заполнение "отсортированного" вектора
+    for (int i = objects.size(); i > 0; --i) {
+        const auto& obj = objects[i - 1];
+        int position = --counting_array[obj.first];
+        sorted_array[position] = obj;
+    }
 }
 
 int main() {
