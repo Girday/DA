@@ -7,6 +7,8 @@ using Key = int;
 using Value = std::string;
 using Object = std::pair<Key, Value>;
 
+const Key MAX_KEY = 65535;
+
 void CountingSort(std::vector<Object>& objects) {
     if (objects.empty())
         return;
