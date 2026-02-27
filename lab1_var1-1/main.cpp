@@ -39,7 +39,7 @@ int main() {
     Key key;
     Value value;
     while (std::cin >> key >> value)
-        objects.push_back({key, value});
+        objects.emplace_back(key, value);
 
     CountingSort(objects);
 
