@@ -31,7 +31,7 @@ int Search(Trie trie, std::string word) {
 
     auto letter = word[0]; // Берём первую букву искомого слова
     if (auto iter = children.find(letter); iter != children.end()) // Ищем эту букву в словарике детей
-        Search(iter->second, word.substr(1)); // Если такая нашлась, то запускаем поиск подслова после этой буквы
+        return Search(iter->second, word.substr(1)); // Если такая нашлась, то запускаем поиск подслова после этой буквы
     else
         return 0; // Если нет, то слово не нашлось
 }
