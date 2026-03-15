@@ -33,26 +33,24 @@ bool IsEmpty(Trie trie) {
     return trie->children.empty();
 }
 
-int Search(Trie trie, std::string word, Trie &sentinel) {
+Trie Search(Trie trie, std::string word) {
     if (IsEmpty(trie)) // Если trie пустой, то там нет слов
-        return 0;
+        return nullptr;
         
     auto& children = trie->children; // Берём словарик детей
 
     if (word.size() == 0) { // Если искомое слово закончилось, проверяем, есть ли в конце sentinel ($)
-        if (auto iter = children.find('$'); iter != children.end()) {
-            sentinel = iter->second;
-            return 1; // Если есть, то слово нашлось
-        }
+        if (auto iter = children.find('$'); iter != children.end())
+            return iter->second;  // Если есть, то слово нашлось
         else
-            return 0; // Если нет, то слово не нашлось
+            return nullptr;  // Если нет, то слово не нашлось
     }
 
     auto letter = word[0]; // Берём первую букву искомого слова
     if (auto iter = children.find(letter); iter != children.end()) // Ищем эту букву в словарике детей
-        return Search(iter->second, word.substr(1), sentinel); // Если такая нашлась, то запускаем поиск подслова после этой буквы
+        return Search(iter->second, word.substr(1)); // Если такая нашлась, то запускаем поиск подслова после этой буквы
     else
-        return 0; // Если нет, то слово не нашлось
+        return nullptr; // Если нет, то слово не нашлось
 }
 
 void DestroyTrie(Trie trie) {
