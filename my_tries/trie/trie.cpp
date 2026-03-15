@@ -5,7 +5,24 @@ Trie CreateTrie() {
 }
 
 int AddWord(Trie trie, std::string word) {
-    
+    auto& children = trie->children;
+
+    if (word.size() == 0) {
+        if (auto iter = children.find('$'); iter != children.end())
+            return 0;
+        else {
+            children['$'] = nullptr;
+            return 1;
+        }
+    }
+
+    auto letter = word[0];
+    if (auto iter = children.find(letter); iter != children.end())
+        return AddWord(children[letter], word.substr(1));
+    else {
+        children[letter] = new Node{trie, letter, {}};
+        return AddWord(children[letter], word.substr(1));
+    }
 }
 
 int DeleteWord(Trie trie, std::string word) {
