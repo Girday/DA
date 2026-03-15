@@ -4,24 +4,24 @@ Trie CreateTrie() {
     return new Node{nullptr, '%', {}};
 }
 
-int AddWord(Trie trie, std::string word) {
-    auto& children = trie->children;
+int AddWord(Trie trie, std::string word) { // Функция добавления слова в trie
+    auto& children = trie->children; // Берём словарик детей
 
-    if (word.size() == 0) {
+    if (word.size() == 0) { // Если вставляемое слово закончилось, ищем sentinel
         if (auto iter = children.find('$'); iter != children.end())
-            return 0;
-        else {
+            return 0; // Если нашли, то слово уже есть
+        else { // Если нет, то создаём sentinel
             children['$'] = nullptr;
-            return 1;
+            return 1; // Вставка закончена
         }
     }
 
-    auto letter = word[0];
+    auto letter = word[0]; // Берём первую букву слова ищем её в словаре детей
     if (auto iter = children.find(letter); iter != children.end())
-        return AddWord(children[letter], word.substr(1));
+        return AddWord(children[letter], word.substr(1)); // Если нашли, запускаем AddWord для остальной части слова
     else {
-        children[letter] = new Node{trie, letter, {}};
-        return AddWord(children[letter], word.substr(1));
+        children[letter] = new Node{trie, letter, {}}; // Если нет, то добавляем новую ноду в словарь
+        return AddWord(children[letter], word.substr(1)); // И запускаем AddWord для остльной части слова
     }
 }
 
