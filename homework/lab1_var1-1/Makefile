@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -O2 -Wall -Wextra -pedantic
+CXXFLAGS = -std=c++20 -O2 -Wall -Wextra -pedantic
 
 SOLUTION_BIN = lab1.out
 BENCHMARK_BIN = benchmark.out
