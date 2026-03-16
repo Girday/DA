@@ -54,5 +54,11 @@ Trie Search(Trie trie, std::string word) {
 }
 
 void DestroyTrie(Trie trie) {
-
+    if (!trie)
+        return;
+    
+    for (auto& [letter, child] : trie->children)
+        DestroyTrie(child);
+    
+    delete trie;
 }
