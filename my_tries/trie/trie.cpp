@@ -70,11 +70,11 @@ Trie Search(Trie trie, std::string word) {
 }
 
 void DestroyTrie(Trie trie) {
-    if (!trie)
+    if (!trie) // Если дошли до корня, то заканчиваем удаление trie
         return;
     
-    for (auto& [letter, child] : trie->children)
-        DestroyTrie(child);
+    for (auto& [letter, child] : trie->children) // Бегаем по всем детям
+        DestroyTrie(child); // Рекурсивно удаляем все ноды из детей
     
-    delete trie;
+    delete trie; // Удаляем ноду
 }
