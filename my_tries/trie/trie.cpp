@@ -26,23 +26,23 @@ int AddWord(Trie trie, std::string word) { // Функция добавлени�
 }
 
 int DeleteWord(Trie trie, std::string word) {
-    Trie current = Search(trie, word);
+    Trie current = Search(trie, word); // Ищем sentinel для этого слова
     
-    if (!current)
+    if (!current) // Если wentinel'а нет, слова в trie нет
         return 0;
     
-    while (current != trie) {
-        Trie parent = current->parent;
-        parent->children.erase(current->letter);
-        delete current;
+    while (current != trie) { // Пока текущая нода не равна корню трая
+        Trie parent = current->parent; // Смотрим на родителя текущей ноды
+        parent->children.erase(current->letter); // Убираем запись этой ноды из словаря детей родителя
+        delete current; // Удаляем текущую ноду
 
-        if (!IsEmpty(parent))
-            break;
+        if (!IsEmpty(parent)) // Если записи в детях родителя ещё остались, то мы на развилке
+            break; // Заканчиваем удаления этого подслова
 
-        current = parent;
+        current = parent; // Иначе поднимаемся на уровень выше
     }
 
-    return 1;
+    return 1; // Слово удалено
 }
 
 bool IsEmpty(Trie trie) {
