@@ -1,11 +1,11 @@
-#include <map>
+#include <unordered_map>
 #include <string>
 
 typedef struct Node Node;
 struct Node {
     Node* parent;
     char letter;
-    std::map<char, Node*> children;
+    std::unordered_map<char, Node*> children;
 };
 
 typedef Node* Trie;
