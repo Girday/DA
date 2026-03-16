@@ -26,7 +26,23 @@ int AddWord(Trie trie, std::string word) { // Функция добавлени�
 }
 
 int DeleteWord(Trie trie, std::string word) {
+    Trie current = Search(trie, word);
+    
+    if (!current)
+        return 0;
+    
+    while (current != trie) {
+        Trie parent = current->parent;
+        parent->children.erase(current->letter);
+        delete current;
 
+        if (!IsEmpty(parent))
+            break;
+
+        current = parent;
+    }
+
+    return 1;
 }
 
 bool IsEmpty(Trie trie) {
