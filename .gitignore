@@ -43,3 +43,4 @@
 *.txt
 MAI-da/
 books/
+*.DS_Store
