@@ -4,12 +4,18 @@
 
 typedef struct node node;
 struct node {
-    std::unique_ptr<node> left;
-    std::unique_ptr<node> right;
+    std::shared_ptr<node> left;
+    std::shared_ptr<node> right;
     int value;
 };
 
-typedef std::unique_ptr<node> vector;
+typedef struct list list;
+struct list {
+    std::shared_ptr<node> begin;
+    std::shared_ptr<node> end;
+};
+
+typedef std::shared_ptr<list> vector;
 
 vector CreateEmpty();
 // void PushBack(vector vec, int value);
