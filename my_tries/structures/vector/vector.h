@@ -18,6 +18,7 @@ struct list {
 typedef std::shared_ptr<list> vector;
 
 vector CreateEmpty();
+bool IsEmpty(vector vec);
 // void PushBack(vector vec, int value);
 // void PushFront(vector vec, int value);
 // int PopBack(vector vec);
