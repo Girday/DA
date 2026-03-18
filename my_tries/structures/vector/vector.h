@@ -23,7 +23,7 @@ bool IsEmpty(vector vec);
 // void PushFront(vector vec, int value);
 // int PopBack(vector vec);
 // int PopFront(vector vec);
-void Insert(vector vec, int pos);
+void Insert(vector vec, int pos, int value);
 void Delete(vector vec, int pos);
 // int GetIndex(vector vec, int value);
 // int Search(vector vec, int index);
