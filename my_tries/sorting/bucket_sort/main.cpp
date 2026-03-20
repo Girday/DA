@@ -5,7 +5,7 @@ void BucketSort(std::vector<double>& vec) {
     if (vec.empty())
         return;
 
-    int n = vec.size();
+    int n = static_cast<int>(vec.size());
     std::vector<std::vector<double>> buckets(n);
 
     double width = 1 / (double)n;
