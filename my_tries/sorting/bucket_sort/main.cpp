@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 void BucketSort(std::vector<double>& vec) {
     if (vec.empty())
