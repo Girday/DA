@@ -19,7 +19,7 @@ void BucketSort(std::vector<double>& vec) {
     }
     
     std::vector<double> sorted;
-    for (auto bucket : buckets) {
+    for (auto& bucket : buckets) {
         std::stable_sort(bucket.begin(), bucket.end());
         for (double elem : bucket)
             sorted.push_back(elem);
