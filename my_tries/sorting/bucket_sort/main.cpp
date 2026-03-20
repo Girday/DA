@@ -8,15 +8,8 @@ void BucketSort(std::vector<double>& vec) {
     int n = static_cast<int>(vec.size());
     std::vector<std::vector<double>> buckets(n);
 
-    double width = 1 / (double)n;
-    for (double elem : vec) {
-        for (int i = 0; i < n; ++i) {
-            if (elem < (i + 1) * width) {
-                buckets[i].push_back(elem);
-                break;
-            }
-        }
-    }
+    for (double elem : vec)
+        buckets[static_cast<int>(n * elem)].push_back(elem);        
     
     std::vector<double> sorted;
     for (auto& bucket : buckets) {
