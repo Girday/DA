@@ -19,7 +19,7 @@ void CountingSortForRadix(std::vector<uint64_t>& vec, int shift) {
 }
 
 void RadixSort(std::vector<uint64_t>& vec) {
-    for (int shift = 0; shift < 256; shift += 8)
+    for (int shift = 0; shift < 64; shift += 8)
         CountingSortForRadix(vec, shift);
 }
 
