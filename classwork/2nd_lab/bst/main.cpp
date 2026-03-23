@@ -1,25 +1,26 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 class BST {
     struct TNode {
         int val;
         TNode* left;
         TNode* right;
-        TNode(int val) : val(val), left(nullptr), right(nullptr) {}
+        TNode(int val): val(val), left(nullptr), right(nullptr){}
     };
 
 public:
-    BST(): root(nullptr) {}
+    BST(): root(nullptr){}
 
     TNode* search(int val) {
         return find(root, val);
     }
 
-    void insert(int val) {
+    void insert(int val){
         root = insert(root, val);
     }
-    
+
     void remove(int val) {
         root = remove(root, val);
     }
@@ -27,79 +28,89 @@ public:
     void inorder() {
         inorder(root);
     }
-
 private:
     TNode* root;
 
     TNode* find(TNode* cur, int val) {
-        if (cur == nullptr)
+        if (cur == nullptr) {
             return nullptr;
-        
-        int cur_val = cur->val;
+        }
 
-        if (cur_val == val)
+        if (cur->val == val) {
             return cur;
-        if (cur_val <= val)
+        }
+        if (val < cur->val) {
             return find(cur->left, val);
-    
+        }
+
         return find(cur->right, val);
     }
 
     TNode* insert(TNode* cur, int val) {
-        if (cur == nullptr)
+        if (cur == nullptr) {
             return new TNode(val);
-        
-        int cur_val = cur->val;
-        if (cur_val <= val)
+        }
+
+        if (val < cur->val) {
             cur->left = insert(cur->left, val);
-        else if (cur_val > val)
+        } else {
             cur->right = insert(cur->right, val);
-        
+        }
+
         return cur;
     }
 
     TNode* remove(TNode* cur, int val) {
-        int cur_val = cur->val;
-        auto left = cur->left;
-        auto right = cur->right;
-            
-        if (val <= cur_val)
-            return remove(left, val);
-        if (val > cur_val)
-            return remove(right, val);
+        if (cur == nullptr) {
+            return nullptr;
+        }
 
-        if (!right && !left) {
+        if (val < cur->val) {
+            cur->left = remove(cur->left, val);
+            return cur;
+        }
+
+        if (val > cur->val) {
+            cur->right = remove(cur->right, val);
+            return cur;
+        }
+
+        if (cur->left == nullptr && cur->right == nullptr) {
             delete cur;
             return nullptr;
         }
-        if (right) {
-            TNode* temp = right;
+
+        if (cur->left == nullptr) {
+            auto next = cur->right;
             delete cur;
-            return temp;
+            return next;
         }
-        if (left) {
-            TNode* temp = left;
+
+        if (cur->right == nullptr) {
+            auto next = cur->left;
             delete cur;
-            return temp;
+            return next;
         }
-        
-        TNode* temp = minRight(right);
-        cur->val = temp->val;
-        cur->right = remove(cur->right, val);
+
+        auto next = minRight(cur->right);
+        cur->val = next->val;
+        cur->right = remove(cur->right, next->val);
 
         return cur;
     }
 
     TNode* minRight(TNode* cur) {
-        while (cur && cur->left)
+        while (cur && cur->left) {
             cur = cur->left;
+        }
 
         return cur;
     }
 
     void inorder(TNode* cur) {
-        if (cur == nullptr)
+        if (cur == nullptr) {
             return;
+        }
 
         inorder(cur->left);
         std::cout << cur->val << " ";
@@ -107,21 +118,22 @@ private:
     }
 
     TNode* rightRotate(TNode* y) {
-        if (y == nullptr)
+        if (y == nullptr) {
             return nullptr;
-        
+        }
+
         auto x = y->left;
         auto beta = x->right;
         y->left = beta;
         x->right = y;
-        
         return x;
     }
 
-    TNode* leftRotate(TNode* x) {
-        if (x == nullptr)
+    TNode* rotateLeft(TNode* x) {
+        if (x == nullptr) {
             return nullptr;
-        
+        }
+
         auto y = x->right;
         auto beta = y->left;
         x->right = beta;
@@ -133,14 +145,17 @@ private:
 
 int main() {
     BST tree = BST();
+    std::vector<int> insert = {3, 14, 15, 9, 2, 6, 35};
 
-    std::vector<int> to_insert = {3, 14, 15, 9, 2, 6, 5, 35};
-    for (auto val : to_insert)
+    for (auto val : insert) {
         tree.insert(val);
+    }
     tree.inorder();
 
-    std::vector<int> to_delete = {5, 9, 14, 2};
-    for (auto val : to_delete)
+    std::vector<int> toDelete = {15, 3, 12, 1, 6};
+    for (auto val : toDelete) {
         tree.remove(val);
+    }
+
     tree.inorder();
 }
