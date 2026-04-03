@@ -2,8 +2,8 @@
 #include <cstdio>
 #include <cstring>
 #include <cstdint>
-#include <exception>
 #include <iostream>
+#include <new>
 #include <sstream>
 #include <string>
 #include <utility>
@@ -43,9 +43,8 @@ private:
         }
 
         ~FileHandle() {
-            if (file_ != nullptr) {
+            if (file_ != nullptr)
                 std::fclose(file_);
-            }
         }
 
         std::FILE* get() const {
@@ -53,9 +52,8 @@ private:
         }
 
         int Close() {
-            if (file_ == nullptr) {
+            if (file_ == nullptr)
                 return 0;
-            }
             std::FILE* raw = file_;
             file_ = nullptr;
             return std::fclose(raw);
@@ -104,22 +102,20 @@ public:
 
         while (current != nil_) {
             parent = current;
-            if (key == current->key) {
+            if (key == current->key)
                 return false;
-            }
             current = (key < current->key) ? current->left : current->right;
         }
 
         Node* inserted = new Node(std::move(key), value, RED, nil_);
         inserted->parent = parent;
 
-        if (parent == nil_) {
+        if (parent == nil_)
             root_ = inserted;
-        } else if (inserted->key < parent->key) {
+        else if (inserted->key < parent->key)
             parent->left = inserted;
-        } else {
+        else
             parent->right = inserted;
-        }
 
         InsertFixup(inserted);
         ++size_;
@@ -128,9 +124,8 @@ public:
 
     bool Erase(const std::string& key) {
         Node* target = FindNode(key);
-        if (target == nil_) {
+        if (target == nil_)
             return false;
-        }
 
         Node* replacement_parent_candidate = target;
         Color original_color = replacement_parent_candidate->color;
@@ -164,18 +159,16 @@ public:
         delete target;
         --size_;
 
-        if (original_color == BLACK) {
+        if (original_color == BLACK)
             DeleteFixup(fixup_node);
-        }
 
         return true;
     }
 
     bool Find(const std::string& key, uint64_t& value) const {
         Node* found = FindNode(key);
-        if (found == nil_) {
+        if (found == nil_)
             return false;
-        }
         value = found->value;
         return true;
     }
@@ -192,9 +185,8 @@ public:
         if (!WriteBytes(file.get(), kMagic, sizeof(kMagic), error) ||
             !WriteByte(file.get(), kVersion, error) ||
             !WriteUint64(file.get(), size_, error) ||
-            !WriteInOrder(file.get(), root_, error)) {
+            !WriteInOrder(file.get(), root_, error))
             return false;
-        }
 
         if (file.Close() != 0) {
             error = MakeSystemErrorMessage(errno);
@@ -220,9 +212,8 @@ public:
         }
 
         RedBlackTreeDictionary loaded_dictionary;
-        if (!ReadFromFile(file.get(), loaded_dictionary, error)) {
+        if (!ReadFromFile(file.get(), loaded_dictionary, error))
             return false;
-        }
 
         if (file.Close() != 0) {
             error = MakeSystemErrorMessage(errno);
@@ -239,9 +230,8 @@ private:
     uint64_t size_;
 
     static char ToLowerAscii(char symbol) {
-        if (symbol >= 'A' && symbol <= 'Z') {
+        if (symbol >= 'A' && symbol <= 'Z')
             return static_cast<char>(symbol - 'A' + 'a');
-        }
         return symbol;
     }
 
@@ -250,9 +240,8 @@ private:
     }
 
     static std::string MakeSystemErrorMessage(int error_code) {
-        if (error_code == 0) {
+        if (error_code == 0)
             return "ERROR: I/O error";
-        }
         return std::string("ERROR: ") + std::strerror(error_code);
     }
 
@@ -261,14 +250,12 @@ private:
     }
 
     static ReadStatus ReadBytes(std::FILE* file, void* buffer, std::size_t size, std::string& error) {
-        if (size == 0) {
+        if (size == 0)
             return ReadStatus::OK;
-        }
 
         const std::size_t bytes_read = std::fread(buffer, 1, size, file);
-        if (bytes_read == size) {
+        if (bytes_read == size)
             return ReadStatus::OK;
-        }
 
         if (std::ferror(file) != 0) {
             error = MakeSystemErrorMessage(errno);
@@ -279,9 +266,8 @@ private:
     }
 
     static bool WriteBytes(std::FILE* file, const void* buffer, std::size_t size, std::string& error) {
-        if (size == 0) {
+        if (size == 0)
             return true;
-        }
 
         if (std::fwrite(buffer, 1, size, file) != size) {
             error = MakeSystemErrorMessage(errno);
@@ -305,18 +291,16 @@ private:
 
     static bool WriteUint64(std::FILE* file, uint64_t value, std::string& error) {
         unsigned char buffer[8];
-        for (int i = 0; i < 8; ++i) {
+        for (int i = 0; i < 8; ++i)
             buffer[i] = static_cast<unsigned char>((value >> (i * 8)) & 0xFFu);
-        }
         return WriteBytes(file, buffer, sizeof(buffer), error);
     }
 
     static ReadStatus ReadUint16(std::FILE* file, uint16_t& value, std::string& error) {
         unsigned char buffer[2];
         const ReadStatus status = ReadBytes(file, buffer, sizeof(buffer), error);
-        if (status != ReadStatus::OK) {
+        if (status != ReadStatus::OK)
             return status;
-        }
         value = static_cast<uint16_t>(buffer[0]) |
                 (static_cast<uint16_t>(buffer[1]) << 8);
         return ReadStatus::OK;
@@ -325,22 +309,19 @@ private:
     static ReadStatus ReadUint64(std::FILE* file, uint64_t& value, std::string& error) {
         unsigned char buffer[8];
         const ReadStatus status = ReadBytes(file, buffer, sizeof(buffer), error);
-        if (status != ReadStatus::OK) {
+        if (status != ReadStatus::OK)
             return status;
-        }
 
         value = 0;
-        for (int i = 0; i < 8; ++i) {
+        for (int i = 0; i < 8; ++i)
             value |= static_cast<uint64_t>(buffer[i]) << (i * 8);
-        }
         return ReadStatus::OK;
     }
 
     static ReadStatus ReadExpected(std::FILE* file, void* buffer, std::size_t size, std::string& error) {
         const ReadStatus status = ReadBytes(file, buffer, size, error);
-        if (status == ReadStatus::END_OF_FILE) {
+        if (status == ReadStatus::END_OF_FILE)
             error = MakeInvalidFormatMessage();
-        }
         return status;
     }
 
@@ -360,9 +341,8 @@ private:
         unsigned char magic[4];
         magic[0] = static_cast<unsigned char>(first_byte);
         ReadStatus status = ReadExpected(file, magic + 1, sizeof(magic) - 1, error);
-        if (status != ReadStatus::OK) {
+        if (status != ReadStatus::OK)
             return false;
-        }
 
         for (std::size_t i = 0; i < sizeof(magic); ++i) {
             if (magic[i] != kMagic[i]) {
@@ -373,9 +353,8 @@ private:
 
         unsigned char version = 0;
         status = ReadExpected(file, &version, sizeof(version), error);
-        if (status != ReadStatus::OK) {
+        if (status != ReadStatus::OK)
             return false;
-        }
         if (version != kVersion) {
             error = MakeInvalidFormatMessage();
             return false;
@@ -387,9 +366,8 @@ private:
             error = MakeInvalidFormatMessage();
             return false;
         }
-        if (status == ReadStatus::SYSTEM_ERROR) {
+        if (status == ReadStatus::SYSTEM_ERROR)
             return false;
-        }
 
         for (uint64_t i = 0; i < count; ++i) {
             uint16_t length = 0;
@@ -398,9 +376,8 @@ private:
                 error = MakeInvalidFormatMessage();
                 return false;
             }
-            if (status == ReadStatus::SYSTEM_ERROR) {
+            if (status == ReadStatus::SYSTEM_ERROR)
                 return false;
-            }
             if (length == 0 || length > 256) {
                 error = MakeInvalidFormatMessage();
                 return false;
@@ -408,9 +385,8 @@ private:
 
             std::string key(length, '\0');
             status = ReadExpected(file, key.data(), key.size(), error);
-            if (status != ReadStatus::OK) {
+            if (status != ReadStatus::OK)
                 return false;
-            }
 
             for (char& symbol : key) {
                 if (!IsEnglishLetter(symbol)) {
@@ -426,9 +402,8 @@ private:
                 error = MakeInvalidFormatMessage();
                 return false;
             }
-            if (status == ReadStatus::SYSTEM_ERROR) {
+            if (status == ReadStatus::SYSTEM_ERROR)
                 return false;
-            }
 
             if (!loaded_dictionary.Insert(std::move(key), value)) {
                 error = MakeInvalidFormatMessage();
@@ -459,9 +434,8 @@ private:
     }
 
     void DestroySubtree(Node* node) noexcept {
-        if (node == nil_) {
+        if (node == nil_)
             return;
-        }
         DestroySubtree(node->left);
         DestroySubtree(node->right);
         delete node;
@@ -470,36 +444,32 @@ private:
     Node* FindNode(const std::string& key) const {
         Node* current = root_;
         while (current != nil_) {
-            if (key == current->key) {
+            if (key == current->key)
                 return current;
-            }
             current = (key < current->key) ? current->left : current->right;
         }
         return nil_;
     }
 
     Node* Minimum(Node* node) const {
-        while (node->left != nil_) {
+        while (node->left != nil_)
             node = node->left;
-        }
         return node;
     }
 
     void LeftRotate(Node* node) {
         Node* pivot = node->right;
         node->right = pivot->left;
-        if (pivot->left != nil_) {
+        if (pivot->left != nil_)
             pivot->left->parent = node;
-        }
 
         pivot->parent = node->parent;
-        if (node->parent == nil_) {
+        if (node->parent == nil_)
             root_ = pivot;
-        } else if (node == node->parent->left) {
+        else if (node == node->parent->left)
             node->parent->left = pivot;
-        } else {
+        else
             node->parent->right = pivot;
-        }
 
         pivot->left = node;
         node->parent = pivot;
@@ -508,18 +478,16 @@ private:
     void RightRotate(Node* node) {
         Node* pivot = node->left;
         node->left = pivot->right;
-        if (pivot->right != nil_) {
+        if (pivot->right != nil_)
             pivot->right->parent = node;
-        }
 
         pivot->parent = node->parent;
-        if (node->parent == nil_) {
+        if (node->parent == nil_)
             root_ = pivot;
-        } else if (node == node->parent->right) {
+        else if (node == node->parent->right)
             node->parent->right = pivot;
-        } else {
+        else
             node->parent->left = pivot;
-        }
 
         pivot->right = node;
         node->parent = pivot;
@@ -566,13 +534,12 @@ private:
     }
 
     void Transplant(Node* source, Node* destination) {
-        if (source->parent == nil_) {
+        if (source->parent == nil_)
             root_ = destination;
-        } else if (source == source->parent->left) {
+        else if (source == source->parent->left)
             source->parent->left = destination;
-        } else {
+        else
             source->parent->right = destination;
-        }
         destination->parent = source->parent;
     }
 
@@ -637,19 +604,16 @@ private:
     }
 
     bool WriteInOrder(std::FILE* file, Node* node, std::string& error) const {
-        if (node == nil_) {
+        if (node == nil_)
             return true;
-        }
 
-        if (!WriteInOrder(file, node->left, error)) {
+        if (!WriteInOrder(file, node->left, error))
             return false;
-        }
 
         if (!WriteUint16(file, static_cast<uint16_t>(node->key.size()), error) ||
             !WriteBytes(file, node->key.data(), node->key.size(), error) ||
-            !WriteUint64(file, node->value, error)) {
+            !WriteUint64(file, node->value, error))
             return false;
-        }
 
         return WriteInOrder(file, node->right, error);
     }
@@ -658,26 +622,22 @@ private:
 static std::string Trim(const std::string& text) {
     std::size_t start = 0;
     while (start < text.size() &&
-           (text[start] == ' ' || text[start] == '\t' || text[start] == '\r' || text[start] == '\n')) {
+           (text[start] == ' ' || text[start] == '\t' || text[start] == '\r' || text[start] == '\n'))
         ++start;
-    }
 
     std::size_t end = text.size();
     while (end > start &&
-           (text[end - 1] == ' ' || text[end - 1] == '\t' || text[end - 1] == '\r' || text[end - 1] == '\n')) {
+           (text[end - 1] == ' ' || text[end - 1] == '\t' || text[end - 1] == '\r' || text[end - 1] == '\n'))
         --end;
-    }
 
     return text.substr(start, end - start);
 }
 
 static std::string NormalizeWord(const std::string& word) {
     std::string normalized = word;
-    for (char& symbol : normalized) {
-        if (symbol >= 'A' && symbol <= 'Z') {
+    for (char& symbol : normalized)
+        if (symbol >= 'A' && symbol <= 'Z')
             symbol = static_cast<char>(symbol - 'A' + 'a');
-        }
-    }
     return normalized;
 }
 
@@ -690,9 +650,8 @@ int main() {
 
     while (std::getline(std::cin, line)) {
         const std::string trimmed_line = Trim(line);
-        if (trimmed_line.empty()) {
+        if (trimmed_line.empty())
             continue;
-        }
 
         try {
             if (trimmed_line[0] == '+') {
@@ -702,22 +661,20 @@ int main() {
                 uint64_t value = 0;
                 input >> command >> word >> value;
 
-                if (dictionary.Insert(NormalizeWord(word), value)) {
+                if (dictionary.Insert(NormalizeWord(word), value))
                     std::cout << "OK\n";
-                } else {
+                else
                     std::cout << "Exist\n";
-                }
             } else if (trimmed_line[0] == '-') {
                 std::istringstream input(trimmed_line);
                 char command = '\0';
                 std::string word;
                 input >> command >> word;
 
-                if (dictionary.Erase(NormalizeWord(word))) {
+                if (dictionary.Erase(NormalizeWord(word)))
                     std::cout << "OK\n";
-                } else {
+                else
                     std::cout << "NoSuchWord\n";
-                }
             } else if (trimmed_line[0] == '!') {
                 std::istringstream input(trimmed_line);
                 char command = '\0';
@@ -730,31 +687,24 @@ int main() {
                 std::string error;
                 bool success = false;
 
-                if (action == "Save") {
+                if (action == "Save")
                     success = dictionary.Save(path, error);
-                } else if (action == "Load") {
+                else
                     success = dictionary.Load(path, error);
-                } else {
-                    error = "ERROR: invalid command";
-                }
 
-                if (success) {
+                if (success)
                     std::cout << "OK\n";
-                } else {
+                else
                     std::cout << error << '\n';
-                }
             } else {
                 uint64_t value = 0;
-                if (dictionary.Find(NormalizeWord(trimmed_line), value)) {
+                if (dictionary.Find(NormalizeWord(trimmed_line), value))
                     std::cout << "OK: " << value << '\n';
-                } else {
+                else
                     std::cout << "NoSuchWord\n";
-                }
             }
         } catch (const std::bad_alloc&) {
             std::cout << "ERROR: not enough memory\n";
-        } catch (const std::exception& error) {
-            std::cout << "ERROR: " << error.what() << '\n';
         }
     }
 
