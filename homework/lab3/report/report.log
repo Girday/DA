@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.2.23)  5 APR 2026 14:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.2.23)  5 APR 2026 16:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -761,11 +761,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 40--40
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 44--44
-[]|\T2B/cmr/m/n/12 04.04.2026,
- []
-
-
 Underfull \hbox (badness 2512) in paragraph at lines 45--46
 \T2B/cmr/m/n/12 и вы-зо-вов \T2B/cmtt/m/n/12 fwrite\T2B/cmr/m/n/12 ; для \T2B/c
 mtt/m/n/12 load \T2B/cmr/m/n/12 го-ря-чи-ми точ-ка-ми ока-за-лись
@@ -773,17 +768,30 @@ mtt/m/n/12 load \T2B/cmr/m/n/12 го-ря-чи-ми точ-ка-ми ока-за-лись
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 48--48
-[]|\T2B/cmr/m/n/12 04.04.2026,
+[]|\T2B/cmr/m/n/12 05.04.2026,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 52--52
+[]|\T2B/cmr/m/n/12 05.04.2026,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 56--56
+[]|\T2B/cmr/m/n/12 05.04.2026,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--60
+[]|\T2B/cmr/m/n/12 05.04.2026,
  []
 
 
 
 [2{/usr/local/texlive/2025basic/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts
-1.enc}]
+1.enc}] [3]
 
-[3]) (./src/benchmark.tex
-
-[4]
+[4]) (./src/benchmark.tex
 
 [5]) (./src/thinks.tex
 
@@ -802,11 +810,11 @@ Package rerunfilecheck Info: File `report.out' has not changed.
 Here is how much of TeX's memory you used:
  14885 strings out of 474142
  229347 string characters out of 5742216
- 832415 words of memory out of 5000000
+ 833415 words of memory out of 5000000
  37683 multiletter control sequences out of 15000+600000
  569455 words of font info for 63 fonts, out of 8000000 for 9000
  735 hyphenation exceptions out of 8191
- 90i,8n,93p,1014b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,8n,93p,1014b,628s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi1
 2.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/c
@@ -818,7 +826,7 @@ c/cm-super/sfbx1728.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/pu
 blic/cm-super/sfrm1200.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1
 /public/cm-super/sfti1200.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/ty
 pe1/public/cm-super/sftt1200.pfb>
-Output written on report.pdf (9 pages, 195923 bytes).
+Output written on report.pdf (9 pages, 196251 bytes).
 PDF statistics:
  149 PDF objects out of 1000 (max. 8388607)
  115 compressed objects within 2 object streams
