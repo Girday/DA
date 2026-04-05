@@ -1,0 +1,8 @@
+implementation=fixed
+mode=find
+entries=200000
+runs=5
+iterations=10
+raw_total_us=[565759.000;511631.000;526154.000;521037.000;548701.000]
+median_total_us=526154.000
+median_us_per_iteration=52615.400

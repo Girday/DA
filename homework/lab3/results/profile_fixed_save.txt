@@ -1,0 +1,8 @@
+implementation=fixed
+mode=save
+entries=200000
+runs=5
+iterations=10
+raw_total_us=[167963.000;153201.000;197818.000;140131.000;142002.000]
+median_total_us=153201.000
+median_us_per_iteration=15320.100

@@ -3,33 +3,33 @@ mode=load
 entries=200000
 runs=1
 iterations=1
-raw_total_us=[131290.000]
-median_total_us=131290.000
-median_us_per_iteration=131290.000
-Process 30788 is not debuggable. Due to security restrictions, leaks can only show or save contents of readonly memory of restricted processes.
+raw_total_us=[49309.000]
+median_total_us=49309.000
+median_us_per_iteration=49309.000
+Process 58736 is not debuggable. Due to security restrictions, leaks can only show or save contents of readonly memory of restricted processes.
 
-Process:         profile_fixed.out [30788]
+Process:         profile_fixed.out [58736]
 Path:            /Users/USER/*/profile_fixed.out
-Load Address:    0x104bcc000
+Load Address:    0x102f30000
 Identifier:      profile_fixed.out
 Version:         0
 Code Type:       ARM64
 Platform:        macOS
-Parent Process:  leaks [30787]
+Parent Process:  leaks [58735]
 Target Type:     live task
 
-Date/Time:       2026-04-04 22:44:43.618 +0300
-Launch Time:     2026-04-04 22:44:42.490 +0300
+Date/Time:       2026-04-05 13:41:41.084 +0300
+Launch Time:     2026-04-05 13:41:40.378 +0300
 OS Version:      macOS 26.3.1 (25D2128)
 Report Version:  7
 Analysis Tool:   /usr/bin/leaks
 
-Physical footprint:         11.8M
-Physical footprint (peak):  34.5M
+Physical footprint:         10.6M
+Physical footprint (peak):  34.4M
 Idle exit:                  untracked
 ----
 
 leaks Report Version: 4.0, multi-line stacks
-Process 30788: 191 nodes malloced for 16 KB
-Process 30788: 0 leaks for 0 total leaked bytes.
+Process 58736: 191 nodes malloced for 16 KB
+Process 58736: 0 leaks for 0 total leaked bytes.
 

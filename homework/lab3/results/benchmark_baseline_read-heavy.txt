@@ -1,0 +1,14 @@
+implementation=baseline
+scenario=read-heavy
+prefill=20000
+measured_ops=200000
+insert_ops=19944
+find_ops=160077
+erase_ops=19979
+rb_tree_raw_us=[56289.500, 48001.291, 46189.708, 35521.792, 56423.583]
+std_map_raw_us=[45510.542, 43698.042, 37968.958, 36462.250, 39375.083]
+rb_tree_median_us=48001.291
+std_map_median_us=39375.083
+rb_tree_ns_per_op=240.006
+std_map_ns_per_op=196.875
+std_map_over_rb_tree=0.820

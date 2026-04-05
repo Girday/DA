@@ -1,0 +1,8 @@
+implementation=baseline
+mode=find
+entries=200000
+runs=5
+iterations=10
+raw_total_us=[584555.000;580566.000;524919.000;572055.000;585666.000]
+median_total_us=580566.000
+median_us_per_iteration=58056.600

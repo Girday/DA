@@ -1,0 +1,8 @@
+implementation=fixed
+mode=erase
+entries=200000
+runs=5
+iterations=5
+raw_total_us=[297840.000;278729.000;291587.000;301475.000;338081.000]
+median_total_us=297840.000
+median_us_per_iteration=59568.000

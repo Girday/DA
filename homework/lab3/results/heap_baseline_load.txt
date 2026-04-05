@@ -1,15 +1,15 @@
-Process:         profile_baseline.out [30779]
+Process:         profile_baseline.out [58957]
 Path:            /Users/USER/*/profile_baseline.out
-Load Address:    0x100118000
+Load Address:    0x10250c000
 Identifier:      profile_baseline.out
 Version:         0
 Code Type:       ARM64
 Platform:        macOS
-Parent Process:  zsh [30778]
+Parent Process:  zsh [58956]
 Target Type:     live task
 
-Date/Time:       2026-04-04 22:44:42.918 +0300
-Launch Time:     2026-04-04 22:44:41.827 +0300
+Date/Time:       2026-04-05 13:42:42.361 +0300
+Launch Time:     2026-04-05 13:42:41.316 +0300
 OS Version:      macOS 26.3.1 (25D2128)
 Report Version:  7
 Analysis Tool:   /usr/bin/heap
@@ -19,7 +19,7 @@ Physical footprint (peak):  29.6M
 Idle exit:                  untracked
 ----
 
-Process 30779: 1 zone
+Process 58957: 1 zone
 
 All zones: 247161 nodes malloced - Sizes: 8192KB[1] 1.5KB[1] 1KB[1] 640[2] 128[1] 96[2] 80[1] 64[200012] 48[16] 32[47119] 16[5] 
 

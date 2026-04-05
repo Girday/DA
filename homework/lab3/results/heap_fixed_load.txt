@@ -1,25 +1,25 @@
-Process:         profile_fixed.out [30776]
+Process:         profile_fixed.out [59004]
 Path:            /Users/USER/*/profile_fixed.out
-Load Address:    0x104de4000
+Load Address:    0x104968000
 Identifier:      profile_fixed.out
 Version:         0
 Code Type:       ARM64
 Platform:        macOS
-Parent Process:  zsh [30775]
+Parent Process:  zsh [58956]
 Target Type:     live task
 
-Date/Time:       2026-04-04 22:44:42.340 +0300
-Launch Time:     2026-04-04 22:44:41.251 +0300
+Date/Time:       2026-04-05 13:42:46.642 +0300
+Launch Time:     2026-04-05 13:42:45.577 +0300
 OS Version:      macOS 26.3.1 (25D2128)
 Report Version:  7
 Analysis Tool:   /usr/bin/heap
 
-Physical footprint:         29.7M
-Physical footprint (peak):  29.7M
+Physical footprint:         29.6M
+Physical footprint (peak):  29.6M
 Idle exit:                  untracked
 ----
 
-Process 30776: 1 zone
+Process 59004: 1 zone
 
 All zones: 247161 nodes malloced - Sizes: 8192KB[1] 1.5KB[1] 1KB[1] 640[2] 128[1] 96[2] 80[1] 64[200012] 48[16] 32[47119] 16[5] 
 

@@ -1,0 +1,8 @@
+implementation=baseline
+mode=insert
+entries=200000
+runs=5
+iterations=5
+raw_total_us=[343380.000;294270.000;364220.000;299562.000;347994.000]
+median_total_us=343380.000
+median_us_per_iteration=68676.000
