@@ -3,6 +3,7 @@
 #include <cstring>
 #include <cstdint>
 #include <iostream>
+#include <memory>
 #include <new>
 #include <sstream>
 #include <string>
@@ -63,21 +64,24 @@ private:
         std::FILE* file_;
     };
 
+    static constexpr std::size_t kBufferSize = 1 << 16;
+
     class BufferedWriter {
     public:
-        explicit BufferedWriter(std::FILE* file) : file_(file), used_(0) {
+        explicit BufferedWriter(std::FILE* file)
+            : file_(file), used_(0), buffer_(std::make_unique<unsigned char[]>(kBufferSize)) {
         }
 
         bool Write(const void* data, std::size_t size, std::string& error) {
             const unsigned char* bytes = static_cast<const unsigned char*>(data);
 
             while (size > 0) {
-                if (used_ == sizeof(buffer_) && !Flush(error))
+                if (used_ == kBufferSize && !Flush(error))
                     return false;
 
-                const std::size_t free_space = sizeof(buffer_) - used_;
+                const std::size_t free_space = kBufferSize - used_;
                 const std::size_t chunk_size = (size < free_space) ? size : free_space;
-                std::memcpy(buffer_ + used_, bytes, chunk_size);
+                std::memcpy(buffer_.get() + used_, bytes, chunk_size);
                 used_ += chunk_size;
                 bytes += chunk_size;
                 size -= chunk_size;
@@ -90,7 +94,7 @@ private:
             if (used_ == 0)
                 return true;
 
-            if (std::fwrite(buffer_, 1, used_, file_) != used_) {
+            if (std::fwrite(buffer_.get(), 1, used_, file_) != used_) {
                 error = MakeSystemErrorMessage(errno);
                 return false;
             }
@@ -102,7 +106,7 @@ private:
     private:
         std::FILE* file_;
         std::size_t used_;
-        unsigned char buffer_[1 << 16];
+        std::unique_ptr<unsigned char[]> buffer_;
     };
 
     enum class ReadStatus {
@@ -113,7 +117,11 @@ private:
 
     class BufferedReader {
     public:
-        explicit BufferedReader(std::FILE* file) : file_(file), position_(0), available_(0) {
+        explicit BufferedReader(std::FILE* file)
+            : file_(file),
+              position_(0),
+              available_(0),
+              buffer_(std::make_unique<unsigned char[]>(kBufferSize)) {
         }
 
         ReadStatus Read(void* destination, std::size_t size, std::string& error) {
@@ -121,7 +129,7 @@ private:
 
             while (size > 0) {
                 if (position_ == available_) {
-                    available_ = std::fread(buffer_, 1, sizeof(buffer_), file_);
+                    available_ = std::fread(buffer_.get(), 1, kBufferSize, file_);
                     position_ = 0;
 
                     if (available_ == 0) {
@@ -137,7 +145,7 @@ private:
                 const std::size_t chunk_size = ((available_ - position_) < size)
                     ? (available_ - position_)
                     : size;
-                std::memcpy(output, buffer_ + position_, chunk_size);
+                std::memcpy(output, buffer_.get() + position_, chunk_size);
                 output += chunk_size;
                 position_ += chunk_size;
                 size -= chunk_size;
@@ -150,7 +158,7 @@ private:
             if (position_ < available_)
                 return ReadStatus::OK;
 
-            available_ = std::fread(buffer_, 1, sizeof(buffer_), file_);
+            available_ = std::fread(buffer_.get(), 1, kBufferSize, file_);
             position_ = 0;
             if (available_ > 0)
                 return ReadStatus::OK;
@@ -167,7 +175,7 @@ private:
         std::FILE* file_;
         std::size_t position_;
         std::size_t available_;
-        unsigned char buffer_[1 << 16];
+        std::unique_ptr<unsigned char[]> buffer_;
     };
 
     static constexpr unsigned char kMagic[4] = {'R', 'B', 'T', 'D'};
