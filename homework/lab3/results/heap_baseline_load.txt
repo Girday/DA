@@ -1,0 +1,46 @@
+Process:         profile_baseline.out [30779]
+Path:            /Users/USER/*/profile_baseline.out
+Load Address:    0x100118000
+Identifier:      profile_baseline.out
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  zsh [30778]
+Target Type:     live task
+
+Date/Time:       2026-04-04 22:44:42.918 +0300
+Launch Time:     2026-04-04 22:44:41.827 +0300
+OS Version:      macOS 26.3.1 (25D2128)
+Report Version:  7
+Analysis Tool:   /usr/bin/heap
+
+Physical footprint:         29.6M
+Physical footprint (peak):  29.6M
+Idle exit:                  untracked
+----
+
+Process 30779: 1 zone
+
+All zones: 247161 nodes malloced - Sizes: 8192KB[1] 1.5KB[1] 1KB[1] 640[2] 128[1] 96[2] 80[1] 64[200012] 48[16] 32[47119] 16[5] 
+
+Found:  68 ObjC classes
+Type names for non-objects could be derived from allocation backtraces if the process used MallocStackLogging
+
+-----------------------------------------------------------------------
+All zones: 247161 nodes (21.7M)
+
+   COUNT      BYTES       AVG   CLASS_NAME                                        TYPE    BINARY
+   =====      =====       ===   ==========                                        ====    ======
+  246999      21.6M      91.9   non-object                                                
+     136         4K      32.0   Class.data (class_rw_t)                           C       libobjc.A.dylib
+       6        816     136.0   xpc_string_t (Storage)                            C       libxpc.dylib
+       6        320      53.3   xpc_dictionary_t (Storage)                        C       libxpc.dylib
+       6        288      48.0   xpc_string_t                                      ObjC    libxpc.dylib
+       2        192      96.0   xpc_dictionary_t                                  ObjC    libxpc.dylib
+       1        128     128.0   dispatch_queue_t (serial)                         ObjC    libdispatch.dylib
+       1         64      64.0   xpc_array_t (Storage)                             C       libxpc.dylib
+       1         64      64.0   xpc_pipe_t                                        ObjC    libxpc.dylib
+       1         48      48.0   Class.data.extended (class_rw_ext_t)              C       libobjc.A.dylib
+       1         48      48.0   xpc_array_t                                       ObjC    libxpc.dylib
+       1         32      32.0   Class.methodCache._buckets (bucket_t)             C       libobjc.A.dylib
+

@@ -1,0 +1,35 @@
+implementation=fixed
+mode=load
+entries=200000
+runs=1
+iterations=1
+raw_total_us=[131290.000]
+median_total_us=131290.000
+median_us_per_iteration=131290.000
+Process 30788 is not debuggable. Due to security restrictions, leaks can only show or save contents of readonly memory of restricted processes.
+
+Process:         profile_fixed.out [30788]
+Path:            /Users/USER/*/profile_fixed.out
+Load Address:    0x104bcc000
+Identifier:      profile_fixed.out
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  leaks [30787]
+Target Type:     live task
+
+Date/Time:       2026-04-04 22:44:43.618 +0300
+Launch Time:     2026-04-04 22:44:42.490 +0300
+OS Version:      macOS 26.3.1 (25D2128)
+Report Version:  7
+Analysis Tool:   /usr/bin/leaks
+
+Physical footprint:         11.8M
+Physical footprint (peak):  34.5M
+Idle exit:                  untracked
+----
+
+leaks Report Version: 4.0, multi-line stacks
+Process 30788: 191 nodes malloced for 16 KB
+Process 30788: 0 leaks for 0 total leaked bytes.
+
