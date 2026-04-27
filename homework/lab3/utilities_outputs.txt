@@ -1,0 +1,517 @@
+profile: insert, find, erase
+
+insert
+
+implementation=baseline
+mode=insert
+entries=200000
+runs=5
+iterations=5
+raw_total_us=[343380.000;294270.000;364220.000;299562.000;347994.000]
+median_total_us=343380.000
+median_us_per_iteration=68676.000
+
+
+find
+
+implementation=baseline
+mode=find
+entries=200000
+runs=5
+iterations=10
+raw_total_us=[584555.000;580566.000;524919.000;572055.000;585666.000]
+median_total_us=580566.000
+median_us_per_iteration=58056.600
+
+
+erase
+
+implementation=baseline
+mode=erase
+entries=200000
+runs=5
+iterations=5
+raw_total_us=[332718.000;296683.000;327970.000;344567.000;327462.000]
+median_total_us=327970.000
+median_us_per_iteration=65594.000
+
+
+profile: save, load
+
+baseline save
+
+implementation=baseline
+mode=save
+entries=200000
+runs=5
+iterations=10
+raw_total_us=[331874.000;348653.000;342164.000;311632.000;291716.000]
+median_total_us=331874.000
+median_us_per_iteration=33187.400
+
+
+fixed save
+
+implementation=fixed
+mode=save
+entries=200000
+runs=5
+iterations=10
+raw_total_us=[167963.000;153201.000;197818.000;140131.000;142002.000]
+median_total_us=153201.000
+median_us_per_iteration=15320.100
+
+
+baseline load
+
+implementation=baseline
+mode=load
+entries=200000
+runs=5
+iterations=10
+raw_total_us=[505490.000;516986.000;503539.000;548093.000;524070.000]
+median_total_us=516986.000
+median_us_per_iteration=51698.600
+
+
+fixed load
+
+implementation=fixed
+mode=load
+entries=200000
+runs=5
+iterations=10
+raw_total_us=[438810.000;425820.000;436348.000;426193.000;430932.000]
+median_total_us=430932.000
+median_us_per_iteration=43093.200
+
+
+sample: save, load
+
+baseline save
+
+
+Analysis of sampling profile_baseline.out (pid 27662) every 1 millisecond
+Process:         profile_baseline.out [27662]
+Path:            /Users/USER/*/profile_baseline.out
+Load Address:    0x10052c000
+Identifier:      profile_baseline.out
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  zsh [27661]
+Target Type:     live task
+
+Date/Time:       2026-04-04 22:33:29.350 +0300
+Launch Time:     2026-04-04 22:33:28.208 +0300
+OS Version:      macOS 26.3.1 (25D2128)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+
+Physical footprint:         28.9M
+Physical footprint (peak):  28.9M
+Idle exit:                  untracked
+----
+
+Call graph:
+    1583 Thread_5029005   DispatchQueue_1: com.apple.main-thread  (serial)
+      1583 start  (in dyld) + 7184  [0x198d39d54]
+        1583 main  (in profile_baseline.out) + 6396  [0x1005300e0]
+          1583 std::__function::__func<RunSave(std::vector<Entry> const&, std::basic_string<char> const&, int, bool, int)::$_0, void ()>::operator()()  (in profile_baseline.out) + 88  [0x1005336e8]
+            1555 RedBlackTreeDictionary::Save(std::basic_string<char> const&, std::basic_string<char>&) const  (in profile_baseline.out) + 204  [0x10052e44c]
+            + 917 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! 619 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : 344 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | 216 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + 137 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! 116 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : 58 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | 52 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | + 45 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | + ! 45 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | + !   43 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | + !   : 43 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | + !   :   43 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | + !   :     43 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | + !   :       43 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | + !   :         43 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | + !   :           43 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | + !   :             43 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 128  [0x100531fc8]
+            + ! : | + ! : | + !   2 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | + !     1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | + !     | 1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | + !     |   1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | + !     |     1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | + !     |       1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | + !     |         1 fwrite  (in libsystem_c.dylib) + 396  [0x198faffe0]
+            + ! : | + ! : | + !     1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | + !       1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | + !         1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | + !           1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | + !             1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | + !               1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 160  [0x100531fe8]
+            + ! : | + ! : | + !                 1 fwrite  (in libsystem_c.dylib) + 316  [0x198faff90]
+            + ! : | + ! : | + !                   1 __sfvwrite  (in libsystem_c.dylib) + 372  [0x198f93c44]
+            + ! : | + ! : | + !                     1 _platform_memmove  (in libsystem_platform.dylib) + 460  [0x19910d54c]
+            + ! : | + ! : | + 7 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | +   4 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | +   : 3 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | +   : | 3 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | +   : |   3 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | +   : |     3 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | +   : |       3 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | +   : |         3 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | +   : |           3 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 128  [0x100531fc8]
+            + ! : | + ! : | +   : 1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | +   :   1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | +   :     1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | +   :       1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 160  [0x100531fe8]
+            + ! : | + ! : | +   :         1 fwrite  (in libsystem_c.dylib) + 172  [0x198faff00]
+            + ! : | + ! : | +   :           1 flockfile  (in libsystem_c.dylib) + 40  [0x198f9f2e8]
+            + ! : | + ! : | +   :             1 _pthread_mutex_firstfit_lock_slow  (in libsystem_pthread.dylib) + 304  [0x1990fe8bc]
+            + ! : | + ! : | +   3 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | +     2 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | +     | 2 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | +     |   2 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | +     |     1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | +     |     + 1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | +     |     +   1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | +     |     +     1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 184  [0x100532000]
+            + ! : | + ! : | +     |     +       1 fwrite  (in libsystem_c.dylib) + 396  [0x198faffe0]
+            + ! : | + ! : | +     |     1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | +     |       1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | +     |         1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | +     |           1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 184  [0x100532000]
+            + ! : | + ! : | +     |             1 RedBlackTreeDictionary::WriteUint64(__sFILE*, unsigned long long, std::basic_string<char>&)  (in profile_baseline.out) + 60  [0x100531ed8]
+            + ! : | + ! : | +     |               1 fwrite  (in libsystem_c.dylib) + 316  [0x198faff90]
+            + ! : | + ! : | +     |                 1 __sfvwrite  (in libsystem_c.dylib) + 372  [0x198f93c44]
+            + ! : | + ! : | +     |                   1 __sfvwrite  (in libsystem_c.dylib) + 468  [0x198f93ca4]
+            + ! : | + ! : | +     1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | +       1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | +         1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | +           1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | +             1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : | +               1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : | +                 1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 160  [0x100531fe8]
+            + ! : | + ! : | +                   1 fwrite  (in libsystem_c.dylib) + 172  [0x198faff00]
+            + ! : | + ! : | +                     1 flockfile  (in libsystem_c.dylib) + 40  [0x198f9f2e8]
+            + ! : | + ! : | +                       1 _pthread_mutex_firstfit_lock_slow  (in libsystem_pthread.dylib) + 304  [0x1990fe8bc]
+            + ! : | + ! : | 6 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : |   4 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : |   ! 4 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : |   !   3 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : |   !   : 2 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : |   !   : | 1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : |   !   : | + 1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : |   !   : | +   1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 60  [0x100531f84]
+            + ! : | + ! : |   !   : | +     1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : |   !   : | +       1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 208  [0x100532018]
+            + ! : | + ! : |   !   : | +         1 RedBlackTreeDictionary::WriteInOrder(__sFILE*, RedBlackTreeDictionary::Node*, std::basic_string<char>&) const  (in profile_baseline.out) + 160  [0x100531fe8]
+            + ! : | + ! : |   !   : | +           1 fwrite  (in libsystem_c.dylib) + 316  [0x198faff90]
+            + ! : | + ! : |   !   : | +             1 __sfvwrite  (in libsystem_c.dylib) + 224  [0x198f93bb0]
+            + ! : | + ! : |   !   : | +               1 __sflush  (in libsystem_c.dylib) + 232  [0x198f9f3e4]
+
+
+baseline load
+
+
+Analysis of sampling profile_baseline.out (pid 27547) every 1 millisecond
+Process:         profile_baseline.out [27547]
+Path:            /Users/USER/*/profile_baseline.out
+Load Address:    0x102ae8000
+Identifier:      profile_baseline.out
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  zsh [27546]
+Target Type:     live task
+
+Date/Time:       2026-04-04 22:33:10.823 +0300
+Launch Time:     2026-04-04 22:33:09.645 +0300
+OS Version:      macOS 26.3.1 (25D2128)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+
+Physical footprint:         29.6M
+Physical footprint (peak):  29.6M
+Idle exit:                  untracked
+----
+
+Call graph:
+    1568 Thread_5028574   DispatchQueue_1: com.apple.main-thread  (serial)
+      1568 start  (in dyld) + 7184  [0x198d39d54]
+        1462 main  (in profile_baseline.out) + 5964  [0x102aebf30]
+        + 1462 std::__function::__func<RunLoad(std::vector<Entry> const&, std::basic_string<char> const&, int, bool, int)::$_0, void ()>::operator()()  (in profile_baseline.out) + 40  [0x102aef868]
+        +   1459 RedBlackTreeDictionary::Load(std::basic_string<char> const&, std::basic_string<char>&)  (in profile_baseline.out) + 156  [0x102aea5b0]
+        +   ! 912 RedBlackTreeDictionary::ReadFromFile(__sFILE*, RedBlackTreeDictionary&, std::basic_string<char>&)  (in profile_baseline.out) + 620  [0x102aee330]
+        +   ! : 389 RedBlackTreeDictionary::Insert(std::basic_string<char>, unsigned long long)  (in profile_baseline.out) + 192,152,...  [0x102ae9f8c,0x102ae9f64,...]
+        +   ! : 328 RedBlackTreeDictionary::Insert(std::basic_string<char>, unsigned long long)  (in profile_baseline.out) + 192  [0x102ae9f8c]
+        +   ! : | 310 _platform_memcmp  (in libsystem_platform.dylib) + 140,8,...  [0x19910af7c,0x19910aef8,...]
+        +   ! : | 18 DYLD-STUB$$memcmp  (in profile_baseline.out) + 4,0  [0x102af066c,0x102af0668]
+        +   ! : 115 RedBlackTreeDictionary::Insert(std::basic_string<char>, unsigned long long)  (in profile_baseline.out) + 232  [0x102ae9fb4]
+        +   ! : | 110 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1990bba78]
+        +   ! : | + 46 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 400,528,...  [0x198f27310,0x198f27390,...]
+        +   ! : | + 33 <deduplicated_symbol>  (in libsystem_malloc.dylib) + 276,184,...  [0x198f22d34,0x198f22cd8,...]
+        +   ! : | + 19 _xzm_xzone_malloc_freelist_outlined  (in libsystem_malloc.dylib) + 324  [0x198f28940]
+        +   ! : | + ! 16 _xzm_xzone_find_and_malloc_from_freelist_chunk  (in libsystem_malloc.dylib) + 952  [0x198f294ac]
+        +   ! : | + ! : 14 xzm_chunk_mark_used  (in libsystem_malloc.dylib) + 176  [0x198f0cd08]
+        +   ! : | + ! : | 9 _xzm_reclaim_mark_used  (in libsystem_malloc.dylib) + 176  [0x198f0cdf0]
+        +   ! : | + ! : | + 9 mach_vm_reclaim_update_kernel_accounting  (in libsystem_kernel.dylib) + 92  [0x1990d3f74]
+        +   ! : | + ! : | +   9 mach_vm_reclaim_update_kernel_accounting_trap  (in libsystem_kernel.dylib) + 8  [0x1990c0cb8]
+        +   ! : | + ! : | 5 _xzm_reclaim_mark_used  (in libsystem_malloc.dylib) + 124  [0x198f0cdbc]
+        +   ! : | + ! : |   5 _xzm_reclaim_mark_used_locked  (in libsystem_malloc.dylib) + 60  [0x198f0f2d0]
+        +   ! : | + ! : |     3 mach_vm_reclaim_try_cancel  (in libsystem_kernel.dylib) + 260  [0x1990d3dd4]
+        +   ! : | + ! : |     ! 3 mach_absolute_time  (in libsystem_kernel.dylib) + 108  [0x1990c10fc]
+        +   ! : | + ! : |     1 DYLD-STUB$$mach_vm_reclaim_try_cancel  (in libsystem_malloc.dylib) + 0  [0x198f38864]
+        +   ! : | + ! : |     1 mach_vm_reclaim_try_cancel  (in libsystem_kernel.dylib) + 300  [0x1990d3dfc]
+        +   ! : | + ! : 2 xzm_chunk_mark_used  (in libsystem_malloc.dylib) + 0,112  [0x198f0cc58,0x198f0ccc8]
+        +   ! : | + ! 1 _xzm_xzone_find_and_malloc_from_freelist_chunk  (in libsystem_malloc.dylib) + 172  [0x198f291a0]
+        +   ! : | + ! : 1 _xzm_chunk_list_pop  (in libsystem_malloc.dylib) + 0  [0x198f29a14]
+        +   ! : | + ! 1 _xzm_xzone_find_and_malloc_from_freelist_chunk  (in libsystem_malloc.dylib) + 984  [0x198f294cc]
+        +   ! : | + ! : 1 _xzm_xzone_malloc_from_empty_freelist_chunk  (in libsystem_malloc.dylib) + 268  [0x198f29c34]
+        +   ! : | + ! 1 _xzm_xzone_find_and_malloc_from_freelist_chunk  (in libsystem_malloc.dylib) + 732  [0x198f293d0]
+        +   ! : | + 9 malloc_type_malloc  (in libsystem_malloc.dylib) + 0,56,...  [0x198f17134,0x198f1716c,...]
+        +   ! : | + 3 _xzm_xzone_malloc  (in libsystem_malloc.dylib) + 0,180  [0x198f2308c,0x198f23140]
+        +   ! : | 5 operator new(unsigned long)  (in libc++abi.dylib) + 0,36,...  [0x1990bba44,0x1990bba68,...]
+        +   ! : 67 RedBlackTreeDictionary::Insert(std::basic_string<char>, unsigned long long)  (in profile_baseline.out) + 424  [0x102aea074]
+        +   ! : | 67 RedBlackTreeDictionary::InsertFixup(RedBlackTreeDictionary::Node*)  (in profile_baseline.out) + 96,40,...  [0x102aed8f4,0x102aed8bc,...]
+        +   ! : 8 RedBlackTreeDictionary::Insert(std::basic_string<char>, unsigned long long)  (in profile_baseline.out) + 168  [0x102ae9f74]
+        +   ! : | 6 _platform_memcmp  (in libsystem_platform.dylib) + 148,208,...  [0x19910af84,0x19910afc0,...]
+        +   ! : | 2 DYLD-STUB$$memcmp  (in profile_baseline.out) + 0,4  [0x102af0668,0x102af066c]
+        +   ! : 5 RedBlackTreeDictionary::Insert(std::basic_string<char>, unsigned long long)  (in profile_baseline.out) + 380  [0x102aea048]
+        +   ! :   5 _platform_memcmp  (in libsystem_platform.dylib) + 140,8,...  [0x19910af7c,0x19910aef8,...]
+        +   ! 162 RedBlackTreeDictionary::ReadFromFile(__sFILE*, RedBlackTreeDictionary&, std::basic_string<char>&)  (in profile_baseline.out) + 564  [0x102aee2f8]
+        +   ! : 138 RedBlackTreeDictionary::ReadUint64(__sFILE*, unsigned long long&, std::basic_string<char>&)  (in profile_baseline.out) + 68  [0x102aee6d0]
+        +   ! : | 51 fread  (in libsystem_c.dylib) + 128  [0x198fa3d64]
+        +   ! : | + 39 flockfile  (in libsystem_c.dylib) + 40  [0x198f9f2e8]
+        +   ! : | + ! 31 _pthread_mutex_firstfit_lock_slow  (in libsystem_pthread.dylib) + 304,60,...  [0x1990fe8bc,0x1990fe7c8,...]
+        +   ! : | + ! 6 pthread_mutex_lock  (in libsystem_pthread.dylib) + 168,12,...  [0x1990fe428,0x1990fe38c,...]
+        +   ! : | + ! 2 _pthread_mutex_lock_init_slow  (in libsystem_pthread.dylib) + 76,104  [0x1990fe4d4,0x1990fe4f0]
+        +   ! : | + 5 flockfile  (in libsystem_c.dylib) + 8,4,...  [0x198f9f2c8,0x198f9f2c4,...]
+        +   ! : | + 4 _pthread_mutex_lock_init_slow  (in libsystem_pthread.dylib) + 128,112  [0x1990fe508,0x1990fe4f8]
+        +   ! : | + 2 flockfile  (in libsystem_c.dylib) + 24  [0x198f9f2d8]
+        +   ! : | + ! 1 DYLD-STUB$$__error  (in libsystem_c.dylib) + 0  [0x199009208]
+        +   ! : | + ! 1 __error  (in libsystem_kernel.dylib) + 0  [0x1990c1608]
+        +   ! : | + 1 pthread_mutex_lock  (in libsystem_pthread.dylib) + 192  [0x1990fe440]
+        +   ! : | 49 fread  (in libsystem_c.dylib) + 148  [0x198fa3d78]
+        +   ! : | + 37 __fread  (in libsystem_c.dylib) + 576,24,...  [0x198f9b494,0x198f9b26c,...]
+        +   ! : | + 10 __fread  (in libsystem_c.dylib) + 500  [0x198f9b448]
+        +   ! : | + ! 10 __srefill1  (in libsystem_c.dylib) + 36  [0x198f9b18c]
+        +   ! : | + !   10 _sread  (in libsystem_c.dylib) + 32  [0x198f9b1f8]
+        +   ! : | + !     10 __sread  (in libsystem_c.dylib) + 24  [0x198fbe6e4]
+        +   ! : | + !       10 __read_nocancel  (in libsystem_kernel.dylib) + 8  [0x1990c2c98]
+        +   ! : | + 2 __fread  (in libsystem_c.dylib) + 524  [0x198f9b460]
+        +   ! : | +   1 DYLD-STUB$$mkdtempat_np  (in libsystem_c.dylib) + 12  [0x199009bd4]
+        +   ! : | +   1 _platform_memmove  (in libsystem_platform.dylib) + 428  [0x19910d52c]
+        +   ! : | 23 fread  (in libsystem_c.dylib) + 160  [0x198fa3d84]
+        +   ! : | + 12 funlockfile  (in libsystem_c.dylib) + 40  [0x198f9f494]
+        +   ! : | + ! 12 _pthread_mutex_firstfit_unlock_slow  (in libsystem_pthread.dylib) + 148,12,...  [0x1990fead4,0x1990fea4c,...]
+        +   ! : | + 8 funlockfile  (in libsystem_c.dylib) + 40,44,...  [0x198f9f494,0x198f9f498,...]
+        +   ! : | + 2 funlockfile  (in libsystem_c.dylib) + 24  [0x198f9f484]
+        +   ! : | + ! 1 DYLD-STUB$$__error  (in libsystem_c.dylib) + 12  [0x199009214]
+        +   ! : | + ! 1 __error  (in libsystem_kernel.dylib) + 4  [0x1990c160c]
+        +   ! : | + 1 _pthread_mutex_firstfit_unlock_slow  (in libsystem_pthread.dylib) + 256  [0x1990feb40]
+        +   ! : | 9 fread  (in libsystem_c.dylib) + 0,120,...  [0x198fa3ce4,0x198fa3d5c,...]
+        +   ! : | 2 DYLD-STUB$$fread  (in profile_baseline.out) + 0  [0x102af0650]
+        +   ! : | 2 __fread  (in libsystem_c.dylib) + 656  [0x198f9b4e4]
+        +   ! : | 2 funlockfile  (in libsystem_c.dylib) + 52,56  [0x198f9f4a0,0x198f9f4a4]
+        +   ! : 22 RedBlackTreeDictionary::ReadUint64(__sFILE*, unsigned long long&, std::basic_string<char>&)  (in profile_baseline.out) + 164,36,...  [0x102aee730,0x102aee6b0,...]
+        +   ! : 2 fread  (in libsystem_c.dylib) + 172  [0x198fa3d90]
+        +   ! 143 RedBlackTreeDictionary::ReadFromFile(__sFILE*, RedBlackTreeDictionary&, std::basic_string<char>&)  (in profile_baseline.out) + 464  [0x102aee294]
+        +   ! : 133 RedBlackTreeDictionary::ReadExpected(__sFILE*, void*, unsigned long, std::basic_string<char>&)  (in profile_baseline.out) + 52  [0x102aee5d0]
+        +   ! : | 62 fread  (in libsystem_c.dylib) + 148  [0x198fa3d78]
+        +   ! : | + 25 __fread  (in libsystem_c.dylib) + 500  [0x198f9b448]
+        +   ! : | + ! 25 __srefill1  (in libsystem_c.dylib) + 36  [0x198f9b18c]
+        +   ! : | + !   25 _sread  (in libsystem_c.dylib) + 32  [0x198f9b1f8]
+        +   ! : | + !     25 __sread  (in libsystem_c.dylib) + 24  [0x198fbe6e4]
+        +   ! : | + !       25 __read_nocancel  (in libsystem_kernel.dylib) + 8  [0x1990c2c98]
+        +   ! : | + 24 __fread  (in libsystem_c.dylib) + 576,512,...  [0x198f9b494,0x198f9b454,...]
+        +   ! : | + 12 __fread  (in libsystem_c.dylib) + 524  [0x198f9b460]
+        +   ! : | + ! 12 _platform_memmove  (in libsystem_platform.dylib) + 444,420,...  [0x19910d53c,0x19910d524,...]
+        +   ! : | + 1 __fread  (in libsystem_c.dylib) + 276  [0x198f9b368]
+        +   ! : | +   1 __srefill0  (in libsystem_c.dylib) + 120  [0x198f9a944]
+        +   ! : | 37 fread  (in libsystem_c.dylib) + 128  [0x198fa3d64]
+        +   ! : | + 29 flockfile  (in libsystem_c.dylib) + 40  [0x198f9f2e8]
+        +   ! : | + ! 21 _pthread_mutex_firstfit_lock_slow  (in libsystem_pthread.dylib) + 304,8,...  [0x1990fe8bc,0x1990fe794,...]
+        +   ! : | + ! 4 _pthread_mutex_lock_init_slow  (in libsystem_pthread.dylib) + 24,76,...  [0x1990fe4a0,0x1990fe4d4,...]
+
+
+leaks
+
+baseline load
+
+implementation=baseline
+mode=load
+entries=200000
+runs=1
+iterations=1
+raw_total_us=[59966.000]
+median_total_us=59966.000
+median_us_per_iteration=59966.000
+Process 58693 is not debuggable. Due to security restrictions, leaks can only show or save contents of readonly memory of restricted processes.
+
+Process:         profile_baseline.out [58693]
+Path:            /Users/USER/*/profile_baseline.out
+Load Address:    0x1005c8000
+Identifier:      profile_baseline.out
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  leaks [58691]
+Target Type:     live task
+
+Date/Time:       2026-04-05 13:41:39.346 +0300
+Launch Time:     2026-04-05 13:41:38.593 +0300
+OS Version:      macOS 26.3.1 (25D2128)
+Report Version:  7
+Analysis Tool:   /usr/bin/leaks
+
+Physical footprint:         11.7M
+Physical footprint (peak):  34.4M
+Idle exit:                  untracked
+----
+
+leaks Report Version: 4.0, multi-line stacks
+Process 58693: 191 nodes malloced for 16 KB
+Process 58693: 0 leaks for 0 total leaked bytes.
+
+
+
+fixed load
+
+implementation=fixed
+mode=load
+entries=200000
+runs=1
+iterations=1
+raw_total_us=[49309.000]
+median_total_us=49309.000
+median_us_per_iteration=49309.000
+Process 58736 is not debuggable. Due to security restrictions, leaks can only show or save contents of readonly memory of restricted processes.
+
+Process:         profile_fixed.out [58736]
+Path:            /Users/USER/*/profile_fixed.out
+Load Address:    0x102f30000
+Identifier:      profile_fixed.out
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  leaks [58735]
+Target Type:     live task
+
+Date/Time:       2026-04-05 13:41:41.084 +0300
+Launch Time:     2026-04-05 13:41:40.378 +0300
+OS Version:      macOS 26.3.1 (25D2128)
+Report Version:  7
+Analysis Tool:   /usr/bin/leaks
+
+Physical footprint:         10.6M
+Physical footprint (peak):  34.4M
+Idle exit:                  untracked
+----
+
+leaks Report Version: 4.0, multi-line stacks
+Process 58736: 191 nodes malloced for 16 KB
+Process 58736: 0 leaks for 0 total leaked bytes.
+
+
+
+heap
+
+baseline load
+
+Process:         profile_baseline.out [58957]
+Path:            /Users/USER/*/profile_baseline.out
+Load Address:    0x10250c000
+Identifier:      profile_baseline.out
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  zsh [58956]
+Target Type:     live task
+
+Date/Time:       2026-04-05 13:42:42.361 +0300
+Launch Time:     2026-04-05 13:42:41.316 +0300
+OS Version:      macOS 26.3.1 (25D2128)
+Report Version:  7
+Analysis Tool:   /usr/bin/heap
+
+Physical footprint:         29.6M
+Physical footprint (peak):  29.6M
+Idle exit:                  untracked
+----
+
+Process 58957: 1 zone
+
+All zones: 247161 nodes malloced - Sizes: 8192KB[1] 1.5KB[1] 1KB[1] 640[2] 128[1] 96[2] 80[1] 64[200012] 48[16] 32[47119] 16[5] 
+
+Found:  68 ObjC classes
+Type names for non-objects could be derived from allocation backtraces if the process used MallocStackLogging
+
+-----------------------------------------------------------------------
+All zones: 247161 nodes (21.7M)
+
+   COUNT      BYTES       AVG   CLASS_NAME                                        TYPE    BINARY
+   =====      =====       ===   ==========                                        ====    ======
+  246999      21.6M      91.9   non-object                                                
+     136         4K      32.0   Class.data (class_rw_t)                           C       libobjc.A.dylib
+       6        816     136.0   xpc_string_t (Storage)                            C       libxpc.dylib
+       6        320      53.3   xpc_dictionary_t (Storage)                        C       libxpc.dylib
+       6        288      48.0   xpc_string_t                                      ObjC    libxpc.dylib
+       2        192      96.0   xpc_dictionary_t                                  ObjC    libxpc.dylib
+       1        128     128.0   dispatch_queue_t (serial)                         ObjC    libdispatch.dylib
+       1         64      64.0   xpc_array_t (Storage)                             C       libxpc.dylib
+       1         64      64.0   xpc_pipe_t                                        ObjC    libxpc.dylib
+       1         48      48.0   Class.data.extended (class_rw_ext_t)              C       libobjc.A.dylib
+       1         48      48.0   xpc_array_t                                       ObjC    libxpc.dylib
+       1         32      32.0   Class.methodCache._buckets (bucket_t)             C       libobjc.A.dylib
+
+
+
+fixed load
+
+Process:         profile_fixed.out [59004]
+Path:            /Users/USER/*/profile_fixed.out
+Load Address:    0x104968000
+Identifier:      profile_fixed.out
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  zsh [58956]
+Target Type:     live task
+
+Date/Time:       2026-04-05 13:42:46.642 +0300
+Launch Time:     2026-04-05 13:42:45.577 +0300
+OS Version:      macOS 26.3.1 (25D2128)
+Report Version:  7
+Analysis Tool:   /usr/bin/heap
+
+Physical footprint:         29.6M
+Physical footprint (peak):  29.6M
+Idle exit:                  untracked
+----
+
+Process 59004: 1 zone
+
+All zones: 247161 nodes malloced - Sizes: 8192KB[1] 1.5KB[1] 1KB[1] 640[2] 128[1] 96[2] 80[1] 64[200012] 48[16] 32[47119] 16[5] 
+
+Found:  68 ObjC classes
+Type names for non-objects could be derived from allocation backtraces if the process used MallocStackLogging
+
+-----------------------------------------------------------------------
+All zones: 247161 nodes (21.7M)
+
+   COUNT      BYTES       AVG   CLASS_NAME                                        TYPE    BINARY
+   =====      =====       ===   ==========                                        ====    ======
+  246999      21.6M      91.9   non-object                                                
+     136         4K      32.0   Class.data (class_rw_t)                           C       libobjc.A.dylib
+       6        816     136.0   xpc_string_t (Storage)                            C       libxpc.dylib
+       6        320      53.3   xpc_dictionary_t (Storage)                        C       libxpc.dylib
+       6        288      48.0   xpc_string_t                                      ObjC    libxpc.dylib
+       2        192      96.0   xpc_dictionary_t                                  ObjC    libxpc.dylib
+       1        128     128.0   dispatch_queue_t (serial)                         ObjC    libdispatch.dylib
+       1         64      64.0   xpc_array_t (Storage)                             C       libxpc.dylib
+       1         64      64.0   xpc_pipe_t                                        ObjC    libxpc.dylib
+       1         48      48.0   Class.data.extended (class_rw_ext_t)              C       libobjc.A.dylib
+       1         48      48.0   xpc_array_t                                       ObjC    libxpc.dylib
+       1         32      32.0   Class.methodCache._buckets (bucket_t)             C       libobjc.A.dylib
