@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.2.23)  27 APR 2026 21:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.2.23)  27 APR 2026 22:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -786,12 +786,6 @@ Underfull \hbox (badness 2644) in paragraph at lines 3--5
  String Matching: An Aid to
  []
 
-
-Underfull \hbox (badness 5533) in paragraph at lines 11--13
-\T2B/cmr/m/n/12 URL: \T2B/cmtt/m/n/12 https://en.cppreference.com/w/cpp/contain
-er/unordered_map \T2B/cmr/m/n/12 (да-та
- []
-
 )
 
 [14] (./report.aux)
@@ -816,10 +810,10 @@ Package rerunfilecheck Info: Checksums for `report.out':
 (rerunfilecheck)             After:  DBBD5A5A012B852AA223526A14C8322D;3005.
  ) 
 Here is how much of TeX's memory you used:
- 15601 strings out of 474142
- 237165 string characters out of 5742216
+ 15599 strings out of 474142
+ 237106 string characters out of 5742216
  1082415 words of memory out of 5000000
- 38205 multiletter control sequences out of 15000+600000
+ 38204 multiletter control sequences out of 15000+600000
  570506 words of font info for 65 fonts, out of 8000000 for 9000
  735 hyphenation exceptions out of 8191
  90i,8n,93p,371b,2146s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -837,10 +831,10 @@ pe1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025basic/texmf-dist/fonts
 /type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2025basic/texmf-dist/fo
 nts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2025basic/texmf-dist
 /fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on report.pdf (15 pages, 287045 bytes).
+Output written on report.pdf (15 pages, 284088 bytes).
 PDF statistics:
- 383 PDF objects out of 1000 (max. 8388607)
- 335 compressed objects within 4 object streams
- 212 named destinations out of 1000 (max. 500000)
+ 382 PDF objects out of 1000 (max. 8388607)
+ 334 compressed objects within 4 object streams
+ 211 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
