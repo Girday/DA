@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.2.23)  27 APR 2026 21:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.2.23)  27 APR 2026 21:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -650,7 +650,7 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 LaTeX Warning: Unused global option(s):
     [pdf].
 
-(./report.aux)
+No file report.aux.
 \openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
@@ -675,10 +675,8 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 4.
 LaTeX Font Info:    ... okay on input line 4.
 LaTeX Info: Redefining \th on input line 4.
 Package hyperref Info: Link coloring OFF on input line 4.
- (./report.out) (./report.out)
 \@outlinefile=\write3
 \openout3 = `report.out'.
-
 
 (/usr/local/texlive/2025basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -732,9 +730,14 @@ been already used, duplicate ignored
                    \relax 
 l.1 \section
             {Описание} [1]
+
+LaTeX Warning: Citation `AhoCorasick' on page 2 undefined on input line 6.
+
+
+LaTeX Warning: Citation `Kormen3' on page 2 undefined on input line 6.
+
 LaTeX Font Info:    Trying to load font information for T2B+cmtt on input line 
 9.
-
 (/usr/local/texlive/2025basic/texmf-dist/tex/latex/cyrillic/t2bcmtt.fd
 File: t2bcmtt.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
@@ -796,17 +799,30 @@ er/unordered_map \T2B/cmr/m/n/12 (��-��
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: DBBD5A5A012B852AA223526A14C8322D;3005.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `report.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `report.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  DBBD5A5A012B852AA223526A14C8322D;3005.
  ) 
 Here is how much of TeX's memory you used:
- 15624 strings out of 474142
- 237478 string characters out of 5742216
+ 15601 strings out of 474142
+ 237165 string characters out of 5742216
  1082415 words of memory out of 5000000
- 38222 multiletter control sequences out of 15000+600000
+ 38205 multiletter control sequences out of 15000+600000
  570506 words of font info for 65 fonts, out of 8000000 for 9000
  735 hyphenation exceptions out of 8191
- 90i,8n,93p,399b,2146s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,8n,93p,371b,2146s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi1
 2.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/c
@@ -821,10 +837,10 @@ pe1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025basic/texmf-dist/fonts
 /type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2025basic/texmf-dist/fo
 nts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2025basic/texmf-dist
 /fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on report.pdf (15 pages, 287568 bytes).
+Output written on report.pdf (15 pages, 287045 bytes).
 PDF statistics:
- 428 PDF objects out of 1000 (max. 8388607)
- 380 compressed objects within 4 object streams
+ 383 PDF objects out of 1000 (max. 8388607)
+ 335 compressed objects within 4 object streams
  212 named destinations out of 1000 (max. 500000)
- 113 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
