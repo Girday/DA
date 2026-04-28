@@ -414,30 +414,25 @@ O(|V|) = O(sum |pi|)
 ## 9. Код 1: наивный поиск подстроки
 
 ```cpp
+// Код 1: наивный поиск подстроки
 #include <iostream>
 #include <string>
 #include <vector>
 
 std::vector<int> NaiveSearch(const std::string& text, const std::string& pattern) {
     std::vector<int> answer;
-
     if (pattern.size() > text.size())
         return answer;
-
     for (std::size_t i = 0; i + pattern.size() <= text.size(); ++i) {
         bool ok = true;
-
-        for (std::size_t j = 0; j < pattern.size(); ++j) {
+        for (std::size_t j = 0; j < pattern.size(); ++j)
             if (text[i + j] != pattern[j]) {
                 ok = false;
                 break;
             }
-        }
-
         if (ok)
             answer.push_back(i);
     }
-
     return answer;
 }
 ```
@@ -453,6 +448,7 @@ O(nm)
 `z[i]` -- длина наибольшего префикса строки, совпадающего с подстрокой, начинающейся в `i`.
 
 ```cpp
+// Код 2: Z-функция за O(n)
 #include <algorithm>
 #include <iostream>
 #include <string>
@@ -462,20 +458,16 @@ std::vector<int> ZFunction(const std::string& s) {
     std::vector<int> z(s.size(), 0);
     int left = 0;
     int right = 0;
-
     for (int i = 1; i < s.size(); ++i) {
         if (i <= right)
             z[i] = std::min(right - i + 1, z[i - left]);
-
         while (i + z[i] < s.size() && s[z[i]] == s[i + z[i]])
             ++z[i];
-
         if (i + z[i] - 1 > right) {
             left = i;
             right = i + z[i] - 1;
         }
     }
-
     return z;
 }
 ```
@@ -488,25 +480,21 @@ std::vector<int> ZFunction(const std::string& s) {
 `s[0..i]`.
 
 ```cpp
+// Код 3: построение sp / prefix-function
 #include <iostream>
 #include <string>
 #include <vector>
 
 std::vector<int> PrefixFunction(const std::string& s) {
     std::vector<int> pi(s.size(), 0);
-
     for (int i = 1; i < s.size(); ++i) {
         int j = pi[i - 1];
-
         while (j > 0 && s[i] != s[j])
             j = pi[j - 1];
-
         if (s[i] == s[j])
             ++j;
-
         pi[i] = j;
     }
-
     return pi;
 }
 ```
@@ -527,6 +515,7 @@ O(n)
 Надёжный вариант:
 
 ```cpp
+// Код 4: построение sp из Z-функции
 #include <algorithm>
 #include <iostream>
 #include <string>
@@ -535,18 +524,13 @@ O(n)
 std::vector<int> PrefixFromZ(const std::string& s) {
     std::vector<int> z = ZFunction(s);
     std::vector<int> pi(s.size(), 0);
-
-    for (int i = 1; i < s.size(); ++i) {
+    for (int i = 1; i < s.size(); ++i)
         for (int j = z[i] - 1; j >= 0; --j) {
             int pos = i + j;
-
             if (pi[pos] != 0)
                 break;
-
             pi[pos] = j + 1;
         }
-    }
-
     return pi;
 }
 ```
@@ -561,6 +545,7 @@ std::vector<int> PrefixFromZ(const std::string& s) {
 Для каждого символа храним его последнее вхождение в образце.
 
 ```cpp
+// Код 5: правило плохого символа в Бойере--Муре
 #include <algorithm>
 #include <iostream>
 #include <string>
@@ -569,10 +554,8 @@ std::vector<int> PrefixFromZ(const std::string& s) {
 std::vector<int> BuildBadChar(const std::string& pattern) {
     const int ALPHABET = 256;
     std::vector<int> last(ALPHABET, -1);
-
     for (int i = 0; i < pattern.size(); ++i)
         last[pattern[i]] = i;
-
     return last;
 }
 ```
@@ -610,6 +593,7 @@ std::vector<int> BoyerMooreBadChar(const std::string& text, const std::string& p
 ## 14. Код 6: trie -- insert/search/delete
 
 ```cpp
+// Код 6: trie -- insert/search/delete
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -621,29 +605,22 @@ struct TrieNode {
 
 void Insert(TrieNode* root, const std::string& word) {
     TrieNode* current = root;
-
     for (char c : word) {
         if (current->next.find(c) == current->next.end())
             current->next[c] = new TrieNode();
-
         current = current->next[c];
     }
-
     current->terminal = true;
 }
 
 bool Search(TrieNode* root, const std::string& word) {
     TrieNode* current = root;
-
     for (char c : word) {
         auto found = current->next.find(c);
-
         if (found == current->next.end())
             return false;
-
         current = found->second;
     }
-
     return current->terminal;
 }
 
@@ -651,31 +628,24 @@ bool Delete(TrieNode* current, const std::string& word, std::size_t index = 0) {
     if (index == word.size()) {
         if (!current->terminal)
             return false;
-
         current->terminal = false;
         return current->next.empty();
     }
-
     char c = word[index];
     auto found = current->next.find(c);
-
     if (found == current->next.end())
         return false;
-
     bool should_delete_child = Delete(found->second, word, index + 1);
-
     if (should_delete_child) {
         delete found->second;
         current->next.erase(found);
     }
-
     return current->next.empty() && !current->terminal;
 }
 
 void Destroy(TrieNode* current) {
     for (auto& edge : current->next)
         Destroy(edge.second);
-
     delete current;
 }
 ```
