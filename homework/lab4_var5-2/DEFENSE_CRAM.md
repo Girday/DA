@@ -414,6 +414,10 @@ O(|V|) = O(sum |pi|)
 ## 9. Код 1: наивный поиск подстроки
 
 ```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+
 std::vector<int> NaiveSearch(const std::string& text, const std::string& pattern) {
     std::vector<int> answer;
 
@@ -431,7 +435,7 @@ std::vector<int> NaiveSearch(const std::string& text, const std::string& pattern
         }
 
         if (ok)
-            answer.push_back(static_cast<int>(i));
+            answer.push_back(i);
     }
 
     return answer;
@@ -449,16 +453,21 @@ O(nm)
 `z[i]` -- длина наибольшего префикса строки, совпадающего с подстрокой, начинающейся в `i`.
 
 ```cpp
+#include <algorithm>
+#include <iostream>
+#include <string>
+#include <vector>
+
 std::vector<int> ZFunction(const std::string& s) {
     std::vector<int> z(s.size(), 0);
     int left = 0;
     int right = 0;
 
-    for (int i = 1; i < static_cast<int>(s.size()); ++i) {
+    for (int i = 1; i < s.size(); ++i) {
         if (i <= right)
             z[i] = std::min(right - i + 1, z[i - left]);
 
-        while (i + z[i] < static_cast<int>(s.size()) && s[z[i]] == s[i + z[i]])
+        while (i + z[i] < s.size() && s[z[i]] == s[i + z[i]])
             ++z[i];
 
         if (i + z[i] - 1 > right) {
@@ -479,10 +488,14 @@ std::vector<int> ZFunction(const std::string& s) {
 `s[0..i]`.
 
 ```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+
 std::vector<int> PrefixFunction(const std::string& s) {
     std::vector<int> pi(s.size(), 0);
 
-    for (int i = 1; i < static_cast<int>(s.size()); ++i) {
+    for (int i = 1; i < s.size(); ++i) {
         int j = pi[i - 1];
 
         while (j > 0 && s[i] != s[j])
@@ -514,11 +527,16 @@ O(n)
 Надёжный вариант:
 
 ```cpp
+#include <algorithm>
+#include <iostream>
+#include <string>
+#include <vector>
+
 std::vector<int> PrefixFromZ(const std::string& s) {
     std::vector<int> z = ZFunction(s);
     std::vector<int> pi(s.size(), 0);
 
-    for (int i = 1; i < static_cast<int>(s.size()); ++i) {
+    for (int i = 1; i < s.size(); ++i) {
         for (int j = z[i] - 1; j >= 0; --j) {
             int pos = i + j;
 
@@ -543,12 +561,17 @@ std::vector<int> PrefixFromZ(const std::string& s) {
 Для каждого символа храним его последнее вхождение в образце.
 
 ```cpp
+#include <algorithm>
+#include <iostream>
+#include <string>
+#include <vector>
+
 std::vector<int> BuildBadChar(const std::string& pattern) {
     const int ALPHABET = 256;
     std::vector<int> last(ALPHABET, -1);
 
-    for (int i = 0; i < static_cast<int>(pattern.size()); ++i)
-        last[static_cast<unsigned char>(pattern[i])] = i;
+    for (int i = 0; i < pattern.size(); ++i)
+        last[pattern[i]] = i;
 
     return last;
 }
@@ -561,8 +584,8 @@ std::vector<int> BoyerMooreBadChar(const std::string& text, const std::string& p
     std::vector<int> answer;
     std::vector<int> last = BuildBadChar(pattern);
 
-    int n = static_cast<int>(text.size());
-    int m = static_cast<int>(pattern.size());
+    int n = text.size();
+    int m = pattern.size();
     int shift = 0;
 
     while (shift <= n - m) {
@@ -575,7 +598,7 @@ std::vector<int> BoyerMooreBadChar(const std::string& text, const std::string& p
             answer.push_back(shift);
             ++shift;
         } else {
-            int bad = static_cast<unsigned char>(text[shift + j]);
+            int bad = text[shift + j];
             shift += std::max(1, j - last[bad]);
         }
     }
@@ -587,6 +610,10 @@ std::vector<int> BoyerMooreBadChar(const std::string& text, const std::string& p
 ## 14. Код 6: trie -- insert/search/delete
 
 ```cpp
+#include <iostream>
+#include <string>
+#include <unordered_map>
+
 struct TrieNode {
     std::unordered_map<char, TrieNode*> next;
     bool terminal = false;
